@@ -1,0 +1,16 @@
+Chiko seed preview uses Cubiomes, Copyright (c) 2020 Cubitect,
+with version/biome-tree patches from SeedForge contributors.
+Original MIT license texts are distributed beside this file.
+
+Sources are pinned in manifest.json and build_seed_generator.py:
+https://github.com/Cubitect/cubiomes
+https://github.com/fwsoapy/seedforge
+
+The current adapter uses only Overworld biome prediction. Mapping Bedrock
+26.50-26.52 to the patched MC_26_3 climate generator is experimental.
+No Bedrock structure prediction or exact surface height is provided.
+The local capture comparison does not establish compatibility for every biome,
+height, historical generator version, or world. Keep real surfaces authoritative.
+
+The DLL is built from source locally. Zig is a temporary build dependency,
+not bundled or required to run the resulting preview.

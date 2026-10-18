@@ -1,0 +1,298 @@
+{
+  "project": "Antique Atlas",
+  "repository": "https://github.com/AntiqueAtlasTeam/AntiqueAtlas",
+  "commit": "b706821d3f0203038de3de6e79a6d354fe2c7b18",
+  "source_branch": "1.18",
+  "copyright": "Copyright (c) 2015 Hunternif <hunternif@gmail.com>",
+  "license": "CC-BY-NC-SA-3.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+  "original_files_modified": false,
+  "runtime_adaptations": "Quarter-tile selection, compositing, ink recoloring and clipping to observed columns. Adapted artwork remains CC-BY-NC-SA-3.0.",
+  "files": {
+    "forest": {
+      "file": "tiles/forest.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/forest.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/forest.png",
+      "sha256": "9a258173999fcc841253253d929d50a633fce95549b49f85f5b2df373ed53188",
+      "bytes": 3926,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "forest2": {
+      "file": "tiles/forest2.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/forest2.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/forest2.png",
+      "sha256": "3062e15f14ccc0d748330d6c994ce0c7b367d53c6d52a9a28910e82659104434",
+      "bytes": 3934,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "forest3": {
+      "file": "tiles/forest3.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/forest3.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/forest3.png",
+      "sha256": "c4465aa27360e662754f0eb9d56b8e15493dc77ec07c18e08067837053932b9f",
+      "bytes": 4153,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "pines": {
+      "file": "tiles/pines.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/pines.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/pines.png",
+      "sha256": "8cc9e08d4319453a1d21f905c268183f9cf862e96d74e5c919848dcd859342cf",
+      "bytes": 3521,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "pines2": {
+      "file": "tiles/pines2.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/pines2.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/pines2.png",
+      "sha256": "64df247cdb6ae7b73a695d003bc92c1ae021cbca9319d617ad25c71140d0046a",
+      "bytes": 3786,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "birch": {
+      "file": "tiles/birch.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/birch.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/birch.png",
+      "sha256": "123a4d07003702df50b731f24f6d665150c4156ccc29a7057b0ca69e97261383",
+      "bytes": 3613,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "birch2": {
+      "file": "tiles/birch2.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/birch2.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/birch2.png",
+      "sha256": "84740bad16697bbb5b437098a576a311c7e3cefb5fe7b243a514e553ab14b616",
+      "bytes": 3723,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "dense_forest": {
+      "file": "tiles/dense_forest.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/dense_forest.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/dense_forest.png",
+      "sha256": "db59da8619cee2448cfc716d87aef9c90697f9b5f41f21e5183c4504eec9cfd5",
+      "bytes": 3542,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "jungle": {
+      "file": "tiles/jungle.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/jungle.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/jungle.png",
+      "sha256": "56a5b7808e3818dc1a3157af5366f9373a4910e42a48ab14626849f5f60d9863",
+      "bytes": 3539,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "jungle2": {
+      "file": "tiles/jungle2.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/jungle2.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/jungle2.png",
+      "sha256": "eff2523fcfd83f4ba78fa0b3aab11744d69896daeabc26f730902ed44a7a0a29",
+      "bytes": 3800,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "savanna": {
+      "file": "tiles/savanna.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/savanna.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/savanna.png",
+      "sha256": "a72db822d501833f91774da3bb399e601310b1374260a923afde31a1c4e97777",
+      "bytes": 3314,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "mountains": {
+      "file": "tiles/mountains.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/mountains.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/mountains.png",
+      "sha256": "da9195efef4e7a9e4e52a90e016c2ba4e8bc02738aabefc280bfe1b0192b6846",
+      "bytes": 3215,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "mountains2": {
+      "file": "tiles/mountains2.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/mountains2.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/mountains2.png",
+      "sha256": "99c270df397ccac961db853ec4c1fd82004017914093c2877586be87fffdafe0",
+      "bytes": 3279,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "hills": {
+      "file": "tiles/hills.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/hills.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/hills.png",
+      "sha256": "d08d89fe1a759f79970b15a24f8833731cfa6ca9086151ea99c4f752629a8dce",
+      "bytes": 3022,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "grass": {
+      "file": "tiles/grass.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/grass.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/grass.png",
+      "sha256": "3cdf2f53516780ed7e11b6a203f477b6c134dffce3320d8c076844720f268086",
+      "bytes": 2928,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "grass2": {
+      "file": "tiles/grass2.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/grass2.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/grass2.png",
+      "sha256": "7e4ded64b1c134ed17a1f78265cc38684964e910298e34deb76350dcfe841a4a",
+      "bytes": 3018,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "sand": {
+      "file": "tiles/sand.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/sand.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/sand.png",
+      "sha256": "af1a9103cc53d0188a0f6db1619982396346153cce2a0f76abc2ffb113a4d56b",
+      "bytes": 3349,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "sand2": {
+      "file": "tiles/sand2.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/sand2.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/sand2.png",
+      "sha256": "b5ce10636aec1946d1c0461720ed8cd800723a19336b1b257e335af1c43f2d31",
+      "bytes": 3392,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "water": {
+      "file": "tiles/water.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/water.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/water.png",
+      "sha256": "4ad940343143a04a4de3e66bf87e12344a75c189297cba31b780e17fcd1c8785",
+      "bytes": 3813,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "water2": {
+      "file": "tiles/water2.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/water2.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/water2.png",
+      "sha256": "7d694dd6e732d2de7668fcc411159ad3070c4c9f6a090b83582183ecafbeb54f",
+      "bytes": 3766,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "swamp": {
+      "file": "tiles/swamp.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/swamp.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/swamp.png",
+      "sha256": "75c267a09f4c5eaba1120bae5159042ebf43fafa6f5d819d8d73bce6c2d6f7cd",
+      "bytes": 3938,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "snow": {
+      "file": "tiles/snow.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/snow.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/snow.png",
+      "sha256": "294d48db268bea3e08eda56f204264564ff30087c47744feedaa67e03d68a92b",
+      "bytes": 3428,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "snow_pines": {
+      "file": "tiles/snow_pines.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/snow_pines.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/snow_pines.png",
+      "sha256": "12f79609b5a10db6fcaf99391c932931d2d4e5b8d04c3c68e25c3b64fbb355e7",
+      "bytes": 4092,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "mushroom": {
+      "file": "tiles/mushroom.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/mushroom.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/mushroom.png",
+      "sha256": "65cd018003002823a66df58ecbf3bb751ab7fa00db112d5b369652992c5e3049",
+      "bytes": 3390,
+      "size": [
+        32,
+        48
+      ]
+    },
+    "shore": {
+      "file": "tiles/shore.png",
+      "upstream_path": "common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/shore.png",
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/common/src/main/resources/assets/antiqueatlas/textures/gui/tiles/shore.png",
+      "sha256": "e32d462736be74664348c7ac2c6ef225d814613742dcdf2f8ea8e46e9ce856db",
+      "bytes": 4399,
+      "size": [
+        32,
+        48
+      ]
+    }
+  },
+  "license_files": {
+    "UPSTREAM-LICENSE.txt": {
+      "source_url": "https://raw.githubusercontent.com/AntiqueAtlasTeam/AntiqueAtlas/b706821d3f0203038de3de6e79a6d354fe2c7b18/LICENSE",
+      "sha256": "8e34c97994339155d54d2d1c86adbb17feadf56fcd4015304e6be99f63bdb68b"
+    },
+    "CC-BY-NC-SA-3.0.txt": {
+      "source_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode.txt",
+      "sha256": "8812f83442fd0eca14eb0208988e190fdcbfebec58fa5459d3218edfdfdc5a32"
+    }
+  }
+}

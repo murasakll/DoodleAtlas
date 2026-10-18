@@ -1,0 +1,5 @@
+amulet-core==1.9.50
+aiohttp==3.14.5
+Pillow==13.0.0
+qrcode==8.2
+cryptography==50.0.2

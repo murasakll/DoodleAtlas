@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "identity": {
+    "paper": "#F7F5ED",
+    "ink": "#263E4B",
+    "water": "#A8E6F5",
+    "marker": "#FF8A1F"
+  },
+  "fallback": "#9AA9AD",
+  "blocks": {
+    "minecraft:water": "#A8E6F5",
+    "minecraft:flowing_water": "#A8E6F5"
+  },
+  "rules": [
+    {
+      "contains": [
+        "water"
+      ],
+      "color": "#A8E6F5"
+    },
+    {
+      "contains": [
+        "lava"
+      ],
+      "color": "#A16C72"
+    },
+    {
+      "contains": [
+        "snow",
+        "ice"
+      ],
+      "color": "#E2EBEC"
+    },
+    {
+      "contains": [
+        "grass",
+        "moss"
+      ],
+      "color": "#A6B5AC"
+    },
+    {
+      "contains": [
+        "leaves",
+        "azalea"
+      ],
+      "color": "#819E92"
+    },
+    {
+      "contains": [
+        "sandstone",
+        "sand"
+      ],
+      "color": "#D8D6C6"
+    },
+    {
+      "contains": [
+        "end_stone"
+      ],
+      "color": "#CACFC0"
+    },
+    {
+      "contains": [
+        "netherrack",
+        "nether_wart"
+      ],
+      "color": "#9C7B80"
+    },
+    {
+      "contains": [
+        "basalt",
+        "blackstone",
+        "deepslate"
+      ],
+      "color": "#686F77"
+    },
+    {
+      "contains": [
+        "dirt",
+        "mud",
+        "farmland"
+      ],
+      "color": "#A59C8F"
+    },
+    {
+      "contains": [
+        "log",
+        "wood",
+        "planks",
+        "chest"
+      ],
+      "color": "#B1A58E"
+    },
+    {
+      "contains": [
+        "stone",
+        "gravel",
+        "ore",
+        "andesite"
+      ],
+      "color": "#9A9F9F"
+    },
+    {
+      "contains": [
+        "terracotta",
+        "brick"
+      ],
+      "color": "#AD9392"
+    },
+    {
+      "contains": [
+        "obsidian"
+      ],
+      "color": "#535866"
+    }
+  ],
+  "minecraft": {
+    "fallback": "#979797",
+    "blocks": {
+      "minecraft:water": "#3F76E4",
+      "minecraft:flowing_water": "#3F76E4"
+    },
+    "rules": [
+      {
+        "contains": [
+          "water"
+        ],
+        "color": "#3F76E4"
+      },
+      {
+        "contains": [
+          "lava"
+        ],
+        "color": "#D45B17"
+      },
+      {
+        "contains": [
+          "snow"
+        ],
+        "color": "#F4FAFF"
+      },
+      {
+        "contains": [
+          "ice"
+        ],
+        "color": "#8FB7DF"
+      },
+      {
+        "contains": [
+          "grass",
+          "moss",
+          "fern",
+          "vine"
+        ],
+        "color": "#79A644"
+      },
+      {
+        "contains": [
+          "leaves",
+          "azalea"
+        ],
+        "color": "#477F32"
+      },
+      {
+        "contains": [
+          "sandstone",
+          "sand"
+        ],
+        "color": "#DDD397"
+      },
+      {
+        "contains": [
+          "end_stone"
+        ],
+        "color": "#DDDCA5"
+      },
+      {
+        "contains": [
+          "netherrack",
+          "nether_wart"
+        ],
+        "color": "#844136"
+      },
+      {
+        "contains": [
+          "basalt",
+          "blackstone",
+          "deepslate"
+        ],
+        "color": "#4F5054"
+      },
+      {
+        "contains": [
+          "dirt",
+          "mud",
+          "farmland"
+        ],
+        "color": "#866043"
+      },
+      {
+        "contains": [
+          "log",
+          "wood",
+          "planks",
+          "chest"
+        ],
+        "color": "#A48550"
+      },
+      {
+        "contains": [
+          "stone",
+          "gravel",
+          "ore",
+          "andesite"
+        ],
+        "color": "#858585"
+      },
+      {
+        "contains": [
+          "terracotta",
+          "brick"
+        ],
+        "color": "#AF7056"
+      },
+      {
+        "contains": [
+          "obsidian"
+        ],
+        "color": "#302B43"
+      }
+    ]
+  },
+  "seed_biomes": {
+    "plains": "#A5B68D",
+    "forest": "#739479",
+    "sand": "#DCCCA3",
+    "snow": "#DDE5DF",
+    "dappled_forest": "#A7A47E",
+    "savanna": "#B9B583",
+    "sulfur_caves": "#C0B87E",
+    "mushroom_fields": "#AC91AA"
+  }
+}

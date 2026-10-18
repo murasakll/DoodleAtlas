@@ -1,0 +1,88 @@
+/* Chiko — componentes isolados. Sem efeitos ou regras aplicadas ao mapa atual. */
+@font-face{font-family:ChikoCaveat;src:url('/assets/Caveat.ttf') format('truetype');font-weight:400 700;font-style:normal;font-display:swap}
+.chiko-ui{
+ --paper:#fbfbf8;--white:#fff;--ink:#111;--muted:#525252;--cyan:#a8e6f5;--cyan-soft:#d6f4fb;--orange:#ff8a1f;
+ --line:2px solid var(--ink);--cutout:4px 4px 0 var(--ink);--focus:3px solid var(--ink);
+ --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;
+ --body:system-ui,-apple-system,'Segoe UI',sans-serif;--hand:ChikoCaveat,'Segoe Print',cursive;--number:ui-monospace,Consolas,monospace;
+ margin:0;color:var(--ink);background:var(--paper);font:15px/1.55 var(--body);color-scheme:light;
+}
+.chiko-ui *{box-sizing:border-box}
+.chiko-ui [hidden]{display:none!important}
+.chiko-ui a{color:inherit;text-underline-offset:4px}
+.chiko-ui :focus-visible{outline:var(--focus);outline-offset:4px}
+.chiko-ui button,.chiko-ui input,.chiko-ui select{font:inherit;color:inherit}
+.chiko-ui button,.chiko-ui summary,.chiko-ui input[type=range],.chiko-ui select{cursor:pointer}
+.chiko-ui button{touch-action:manipulation}
+.chiko-ui h1,.chiko-ui h2,.chiko-ui h3,.chiko-ui p{margin:0}
+.chiko-ui h1,.chiko-ui h2,.chiko-ui h3{font-family:var(--hand);line-height:1.05}
+.chiko-ui h1{font-size:clamp(46px,7vw,82px);font-weight:700;letter-spacing:-1.5px;max-width:800px}
+.chiko-ui h2{font-size:34px}.chiko-ui h3{font-size:27px}
+.chiko-ui small,.chiko-ui .caption{font-size:12px;color:var(--muted)}
+.chiko-ui .numbers{font-family:var(--number);font-variant-numeric:tabular-nums}
+.chiko-ui .eyebrow{font:700 11px/1.5 var(--body);letter-spacing:2px;text-transform:uppercase}
+.chiko-ui .skip{position:absolute;top:-100px;left:16px;z-index:10;background:var(--cyan);padding:12px}
+.chiko-ui .skip:focus{top:8px}
+.chiko-ui .sheet{max-width:1240px;padding:0 32px;margin:auto}
+.chiko-ui .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:88px;border-bottom:var(--line)}
+.chiko-ui .wordmark{display:flex;align-items:center;gap:12px;font:700 31px/1 var(--hand);text-decoration:none}
+.chiko-ui .wordmark svg{width:36px;height:38px;flex:none}
+.chiko-ui .top-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap;font-size:12px}
+.chiko-ui .hero{padding:48px 0 36px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
+.chiko-ui .hero h1{margin:12px 0 16px}.chiko-ui .hero p{max-width:600px}
+.chiko-ui .hero-note{padding:14px 18px;border:var(--line);background:var(--cyan-soft);transform:rotate(2deg);font:600 23px/1.15 var(--hand);max-width:200px}
+.chiko-ui .section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:28px 0 18px}
+.chiko-ui .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:32px;align-items:start}
+.chiko-ui .stack{display:grid;gap:18px}
+.chiko-ui .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.chiko-ui .spread{justify-content:space-between}
+.chiko-ui .panel{background:var(--white);border:var(--line);border-radius:3px 8px 2px 5px;box-shadow:var(--cutout);padding:24px;min-width:0}
+.chiko-ui .panel-heading{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.chiko-ui .index{font:700 12px var(--number);padding:4px 7px;border:var(--line);background:var(--cyan-soft);transform:rotate(-4deg)}
+.chiko-ui .button{display:inline-flex;gap:8px;align-items:center;justify-content:center;min-height:44px;padding:10px 18px;border:var(--line);border-radius:3px 5px 2px 4px;background:var(--white);box-shadow:3px 3px 0 var(--ink);font-weight:650;text-decoration:none;transition:transform 100ms ease,box-shadow 100ms ease}
+.chiko-ui .button:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.chiko-ui .button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.chiko-ui .button--primary{background:var(--orange)}
+.chiko-ui .button--cyan,.chiko-ui .button[aria-pressed=true]{background:var(--cyan)}
+.chiko-ui .button:disabled{cursor:not-allowed;background:#eee;color:#666;box-shadow:none;transform:none}
+.chiko-ui .button--quiet{box-shadow:none}
+.chiko-ui .tabs{display:flex;gap:6px;border-bottom:var(--line);padding:0 6px;overflow-x:auto}
+.chiko-ui .tab{flex:1;min-height:46px;padding:8px 10px;white-space:nowrap;border:var(--line);border-bottom:0;border-radius:7px 4px 0 0;background:var(--paper);font-size:13px;font-weight:650}
+.chiko-ui .tab[aria-selected=true]{background:var(--cyan);box-shadow:inset 0 4px 0 var(--ink)}
+.chiko-ui .tab-content{padding-top:18px;min-height:75px}
+.chiko-ui .field{display:grid;gap:7px;font-size:13px;font-weight:600}
+.chiko-ui .input{border:var(--line);border-radius:3px;background:var(--white);width:100%;min-height:44px;padding:10px 12px}
+.chiko-ui .check{display:flex;gap:10px;align-items:center;min-height:44px}
+.chiko-ui .check input{accent-color:var(--ink);width:18px;height:18px;flex:none}
+.chiko-ui .catalog-card{border:var(--line);background:var(--paper);padding:16px;border-radius:2px 5px 3px 2px}
+.chiko-ui .avatar{width:40px;height:40px;background:var(--orange);border:var(--line);display:grid;place-items:center;font:700 22px var(--hand);flex:none}
+.chiko-ui .catalog-card .identity{flex:1;min-width:140px}.chiko-ui .catalog-card .numbers{font-size:12px}
+.chiko-ui .post-it{position:relative;background:var(--cyan-soft);padding:28px 20px 20px;border:var(--line);border-radius:2px 4px 8px 3px;box-shadow:3px 3px 0 var(--ink);transform:rotate(-1deg)}
+.chiko-ui .post-it::before{content:'';position:absolute;top:-9px;left:36%;width:58px;height:16px;background:var(--orange);border:var(--line);transform:rotate(-5deg)}
+.chiko-ui .post-it h3{margin-bottom:6px}.chiko-ui .post-it .numbers{font-size:12px}
+.chiko-ui .pin-list{display:grid;gap:22px}.chiko-ui .pin-form{display:flex;gap:10px;align-items:end;margin-top:20px}.chiko-ui .pin-form .field{flex:1;min-width:0}
+.chiko-ui .stamp{display:inline-block;padding:12px 16px;border:3px double var(--ink);transform:rotate(-3deg);font:700 16px var(--number);letter-spacing:1px;background:var(--paper);max-width:100%;overflow-wrap:anywhere}
+.chiko-ui .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;margin-top:20px}
+.chiko-ui .legend span{display:flex;align-items:center;gap:8px}.chiko-ui .swatch{display:inline-block;width:17px;height:17px;border:var(--line);background:var(--cyan)}
+.chiko-ui .swatch--real{background:#c7c7c7}.chiko-ui .swatch--seed{background:var(--cyan-soft);border-style:dashed}
+.chiko-ui .ribbon{background:var(--cyan);border:var(--line);padding:18px 20px;box-shadow:3px 3px 0 var(--ink);border-radius:2px 9px 2px 1px}
+.chiko-ui input[type=range]{width:100%;min-height:44px;accent-color:var(--ink);margin:4px 0;display:block}
+.chiko-ui .ribbon .ticks{display:flex;justify-content:space-between;font:11px var(--number)}
+.chiko-ui .accordion{border:var(--line);background:var(--paper);border-radius:3px}
+.chiko-ui .accordion summary{padding:12px 16px;font-weight:650;min-height:48px}.chiko-ui .accordion>div{padding:0 16px 16px}
+.chiko-ui .chiko-preview{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:12px 0 20px}
+.chiko-ui .chiko-placeholder{width:112px;height:132px;border:2px dashed var(--ink);display:grid;align-content:center;justify-items:center;gap:6px;background:var(--paper);flex:none;font-size:12px}
+.chiko-ui .chiko-placeholder strong{font:700 29px var(--hand)}
+.chiko-ui .bubble{border:var(--line);border-radius:18px 16px 20px 2px;background:var(--white);padding:16px 20px;box-shadow:3px 3px 0 var(--ink);font:600 26px/1.15 var(--hand);max-width:230px}
+.chiko-ui .state-picker{margin-top:8px}.chiko-ui .state-picker .button{padding:7px 12px;font-size:12px}
+.chiko-ui .paper-frame{border:12px solid transparent;border-image:url('/assets/paper-frame.svg') 12 stretch;padding:14px;background:var(--white)}
+.chiko-ui .notice{background:var(--cyan-soft);border-left:4px solid var(--ink);padding:12px 16px;font-size:12px;margin-top:20px}
+.chiko-ui .demo-status{min-height:28px;font-size:13px;margin-top:12px}
+.chiko-ui .footer{border-top:var(--line);padding:24px 0 32px;display:flex;justify-content:space-between;gap:12px;font-size:12px;margin-top:40px;flex-wrap:wrap}
+@media(max-width:720px){
+ .chiko-ui .sheet{padding:0 18px}.chiko-ui .topbar{min-height:76px}.chiko-ui .top-links{gap:10px}.chiko-ui .top-links .optional{display:none}
+ .chiko-ui .hero{grid-template-columns:1fr;padding:32px 0 24px;gap:20px}.chiko-ui .hero-note{transform:none;max-width:none;font-size:22px}
+ .chiko-ui .grid{grid-template-columns:1fr;gap:22px}.chiko-ui .panel{padding:20px}.chiko-ui .section-heading{align-items:start;flex-direction:column;gap:4px}
+ .chiko-ui .pin-form{flex-wrap:wrap}.chiko-ui .pin-form .field{min-width:170px}.chiko-ui .tab{font-size:12px;padding:8px}
+}
+@media(prefers-reduced-motion:reduce){.chiko-ui *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
