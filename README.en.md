@@ -3,6 +3,7 @@
 <h1 align="center">DoodleAtlas</h1>
 <p align="center"><b>Your world, kept between maps and doodles.</b></p>
 <p align="center"><a href="README.md">Português</a> · <b>English</b></p>
+<p align="center"><a href="https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer/releases/tag/v0.2.0"><b>Download DoodleAtlas</b></a> · <a href="https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer/releases">All releases</a></p>
 <p align="center"><a href="docs/GUIA.md">Guide</a> · <a href="docs/GALERIA.md">Gallery</a> · <a href="docs/ESTRUTURA.md">Structure</a> · <a href="docs/CONTRIBUINDO.md">Contribute</a></p>
 
 An interactive map for **Minecraft Bedrock** that looks like a handmade notebook. View your world and players in the browser, draw your village on top and export it as an image.
