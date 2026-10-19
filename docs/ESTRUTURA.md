@@ -5,7 +5,7 @@
 A raiz guarda a apresentação, o empacotamento e três atalhos do Windows. O código Python do aplicativo fica em **src/chiko/**. Dados locais e estudos de design não acompanham a publicação.
 
 ~~~text
-Chiko/
+DoodleAtlas/
 ├── .github/                 Modelos de issues e pull requests
 ├── config/
 │   ├── settings.example.json  Configuração pública, sem um save escolhido
@@ -33,6 +33,7 @@ Chiko/
 │   ├── web/                 Mapa, editor, histórico e UI do caderno
 │   ├── assets/
 │   │   ├── antique_atlas/   Arte, manifesto e licenças
+│   │   ├── branding/        Ícone do DoodleAtlas
 │   │   ├── chiko/           Mascote em pixel art
 │   │   └── web/             Fonte local e molduras
 │   ├── bedrock_pack/        Manifesto e scripts do addon universal

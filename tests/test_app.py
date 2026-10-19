@@ -114,7 +114,8 @@ class Integration(unittest.IsolatedAsyncioTestCase):
         # The public demo contains sample data only; protected APIs stay protected.
         for path in ('/components.html','/components.js','/chiko-design.css',
                      '/tile-source.js','/map-renderer.js','/pixel-avatars.js','/chiko.js',
-                     '/assets/paper-frame.svg','/assets/Caveat.ttf','/assets/OFL-Caveat.txt'):
+                     '/assets/paper-frame.svg','/assets/Caveat.ttf','/assets/OFL-Caveat.txt',
+                     '/assets/doodleatlas-icon.png','/favicon.ico'):
             response=await self.client.get(path)
             self.assertEqual(200,response.status,path)
             self.assertTrue(await response.read(),path)

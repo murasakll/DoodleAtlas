@@ -3,9 +3,11 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "chiko-bedrock-map"
+name = "doodleatlas"
 version = "0.2.0"
-description = "Local Bedrock map viewer and pixel-art cartography editor"
+description = "DoodleAtlas: a hand-drawn notebook and interactive map for Minecraft Bedrock"
+license = {file = "LICENSE"}
+authors = [{name = "murasakll"}]
 requires-python = ">=3.12,<3.13"
 dynamic = ["dependencies"]
 
@@ -15,6 +17,7 @@ Issues = "https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer/issues"
 Documentation = "https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer/blob/main/docs/GUIA.md"
 
 [project.scripts]
+doodleatlas = "chiko.__main__:main"
 chiko = "chiko.__main__:main"
 
 [tool.setuptools.packages.find]

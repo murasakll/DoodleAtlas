@@ -1,114 +1,145 @@
-<p align="center"><img src="docs/images/chiko-banner.png" alt="Chiko ao lado de um atlas de papel, com rios ciano e montanhas desenhadas" width="100%"></p>
+<p align="center"><img src="src/chiko/assets/branding/doodleatlas-icon.png" alt="Mapa desenhado à mão com Chiko segurando o canto" width="220"></p>
 
-# Chiko · um caderno para seus mundos Bedrock
+# DoodleAtlas
 
-Terreno observado, amigos no mapa e um atlas que você pode desenhar. Uma página local com interface de caderno, bordas rabiscadas e o Chiko acompanhando a viagem.
+**Seu mundo, guardado entre mapas e rabiscos.**
 
-**Windows · Minecraft Bedrock · navegador no PC e na LAN · em desenvolvimento**
+DoodleAtlas é uma ferramenta de cartografia interativa para **Minecraft Bedrock**. A interface parece um caderno feito à mão: papel, traços em preto e branco, bordas sketch animadas e detalhes em ciano. O terreno pode aparecer como atlas ilustrado ou com as cores naturais do Minecraft e relevo.
 
-[Começar](#começar-no-windows) · [Guia](docs/GUIA.md) · [Galeria](docs/GALERIA.md) · [Estrutura](docs/ESTRUTURA.md) · [Créditos](THIRD_PARTY_NOTICES.md)
+**Chiko é o bibliotecário do atlas.** Ele acompanha a exploração e guarda os mapas e registros das suas aventuras. O personagem é de [Hachiko / Noah](https://www.tiktok.com/@hachikookami).
 
-## O que tem aqui
+[Guia](docs/GUIA.md) · [Galeria](docs/GALERIA.md) · [Estrutura completa](docs/ESTRUTURA.md) · [Contribuir](docs/CONTRIBUINDO.md)
 
-| Função | Como funciona |
-| --- | --- |
-| Dois estilos de terreno | Atlas com arte do Antique Atlas ou cores naturais com relevo. |
-| Jogadores e entidades | Posições e dados acessíveis ao pack, quando o jogo envia a captura. |
-| Cartografia manual | Estradas e cercas conectáveis, carimbos, pintura do fundo e construção modular. |
-| Lugares para lembrar | Pontos pessoais no navegador ou compartilhados no mundo. |
-| Personagens | Presets, acessórios e envio manual de skin/rosto PNG. |
-| Histórico por região | Mudanças por chunk e quadros de uma região principal escolhida. |
-| Exportação | PNG da área enquadrada, com título, norte, escala e anotações opcionais. |
-| Caderno doodle | Temas claro/escuro/sistema, bordas sketch, modo foco e sons opcionais. |
+## Destaques
 
-O save fornece dados observados; o pack complementa o que está disponível no jogo. A prévia de seed é **opcional e experimental**, atrás do terreno real. Ela não confirma construções nem alterações de jogadores.
+- **Caderno doodle:** temas claro, escuro e automático, bordas sketch e sons opcionais.
+- **Dois estilos de terreno:** Atlas ilustrado ou Minecraft com cores naturais e relevo.
+- **Editor manual:** pincéis, estradas e cercas conectáveis, carimbos, pintura de fundo e construções modulares.
+- **Três dimensões:** Overworld, Nether e End.
+- **Jogadores ao vivo:** posição e entidades quando o pack envia os dados do jogo.
+- **Lugares e personagens:** pontos pessoais ou compartilhados, presets e envio manual de skin/rosto PNG.
+- **Registros por mundo:** desenhos, histórico por chunk e quadros de uma região principal escolhida.
+- **Exportação PNG:** área enquadrada com título, norte, escala e anotações opcionais.
+- **Seed opcional:** previsão experimental sempre atrás do terreno observado.
 
 ## Por dentro do caderno
 
-Os prints abaixo mostram **a interface executada com dados fictícios**. Não são um save real nem uma prova de desempenho. A capa é uma ilustração gerada com IA a partir da identidade do Chiko.
+Os prints mostram a interface funcionando com **dados fictícios de demonstração**. Não são um save real nem uma medição de desempenho. O ícone é uma adaptação gerada com IA da referência do Chiko.
 
 | Atlas de papel | Editor cartográfico |
 | --- | --- |
-| ![Mapa no estilo Atlas](docs/images/01-atlas.png) | ![Paleta e controles de desenho](docs/images/02-editor.png) |
+| ![Mapa ilustrado](docs/images/01-atlas.png) | ![Ferramentas de desenho](docs/images/02-editor.png) |
 | Lugares compartilhados | Cores naturais |
-| ![Lugares no mapa](docs/images/03-lugares.png) | ![Modo Minecraft com relevo](docs/images/04-minecraft.png) |
+| ![Lugares no mapa](docs/images/03-lugares.png) | ![Modo Minecraft](docs/images/04-minecraft.png) |
 
-[Mais imagens: histórico e tema noturno](docs/GALERIA.md).
+[Ver histórico e tema noturno](docs/GALERIA.md).
 
-## Começar no Windows
+## Estrutura do projeto
 
-1. Baixe o repositório e extraia numa pasta sua.
-2. Execute **instalar.bat**. Python 3.12 e dependências ficam em **runtime/**.
-3. Execute **iniciar.bat**. Havendo vários mundos, escolha um em **config/settings.local.json** ou pela linha de comando abaixo.
-4. Abra o endereço local mostrado no terminal. Outros aparelhos usam o endereço LAN do mesmo PC.
-5. Para jogadores ao vivo, importe **dist/Chiko-Universal.mcpack**, ative no mundo e faça o vínculo em **Ajustes → Leitura e captura do jogo**.
+```text
+DoodleAtlas/
+├── src/chiko/          Código; nome técnico mantido por compatibilidade
+│   ├── network/        Conexão e protocolo
+│   ├── world/          Descoberta e leitura do save
+│   ├── storage/        Dados, desenhos e histórico
+│   ├── cartography/    Paleta, relevo e tiles
+│   ├── web/            Interface, mapa e editor
+│   ├── assets/         Ícone, mascote, fonte e arte do atlas
+│   ├── bedrock_pack/   Addon para os dados ao vivo
+│   └── vendor/         Seed opcional e licenças
+├── config/             Exemplo público e configuração local ignorada pelo Git
+├── docs/               Guia e prints das funções
+├── scripts/            Instalação e ferramentas de desenvolvimento
+├── tests/              Testes e simulações
+├── instalar.bat        Preparar Python portátil no Windows
+├── iniciar.bat         Abrir o servidor
+├── parar.bat           Encerrar o aplicativo
+├── pyproject.toml      Pacote e comandos
+├── requirements.txt    Dependências Python
+├── THIRD_PARTY_NOTICES.md
+├── LICENSE
+└── README.md
+```
 
-O pack é gerado pelo instalador. Salve e saia do mundo antes de instalar ou atualizar um pack. Encerre o aplicativo com **parar.bat**.
+Os assets ficam dentro do pacote para acompanhar a instalação. Mundos, capturas, tokens, logs e configurações pessoais ficam fora do Git.
 
-~~~powershell
-# Ver os mundos encontrados
-.\runtime\python\python.exe -m chiko worlds
+## Instalar e rodar
 
-# Escolher um mundo
-.\runtime\python\python.exe -m chiko serve --world "worlds/MeuMundo"
+O ambiente preparado é **Windows x64 com Python 3.12**. O pack declara engine mínima **1.26.50** e Script API **2.9.0**; isso não garante versões futuras. O gerador nativo de seed é opcional e voltado a Windows x64.
 
-# Gerar novamente o addon universal
-.\runtime\python\python.exe -m chiko pack
-~~~
+```powershell
+git clone https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer.git DoodleAtlas
+cd DoodleAtlas
+```
 
-O pack atual declara engine mínima **1.26.50** e Script API **2.9.0**. Isso não garante versões futuras. [Instalação, vínculo, rede e solução de problemas](docs/GUIA.md).
+### Instalação simples no Windows
 
-### Já usa Python?
+Execute `instalar.bat` e depois `iniciar.bat`. O instalador baixa Python e dependências para `runtime/` e gera `dist/Chiko-Universal.mcpack`. Abra o endereço mostrado no terminal.
 
-Use **Python 3.12** em um ambiente virtual:
+Para dados ao vivo, importe o `.mcpack`, ative-o no mundo e faça o vínculo em **Ajustes → Leitura e captura do jogo**. Salve e saia do mundo antes de instalar ou atualizar o pack. Use `parar.bat` para encerrar.
 
-~~~powershell
+### Com seu Python
+
+```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install -e .
+python -m pip install -r requirements.txt
+python -m pip install -e . --no-deps
 python -m chiko init
+python -m chiko worlds
 python -m chiko pack
 python -m chiko serve --world "worlds/MeuMundo"
-~~~
+```
 
-O caminho é seu; o projeto não vem com o save de ninguém. O suporte empacotado e o gerador nativo opcional são voltados a Windows x64.
+Substitua `worlds/MeuMundo` pelo caminho do seu save. O módulo `chiko` e o nome do pack foram mantidos por compatibilidade; o projeto se chama **DoodleAtlas**.
 
-## Limites atuais
+### Configurar mundo, endereço e portas
 
-- Um IP remoto não dá acesso ao save ou ao log de outro servidor. Não há integração automática com qualquer servidor público ou Realm.
-- O pack não lê terreno arbitrário descarregado. A seed não confirma estruturas ou alturas exatas.
-- O histórico não reconstrói um passado que não foi registrado. Sua região principal tem limite de **4.096 chunks**, quadros pequenos e cota de armazenamento.
-- Não existe screenshot gigante periódico do mundo inteiro. Exportações grandes são solicitadas pelo usuário.
-- Sons só começam após ativação manual. Sono e subterrâneo do Chiko ainda não são eventos reais integrados.
-- Nenhum ganho de FPS é prometido sem medição equivalente. As animações podem ser pausadas.
+`python -m chiko init` cria **config/settings.local.json** a partir do exemplo, sem sobrescrever suas escolhas. Ajuste os campos necessários:
 
-## Seus dados ficam no seu PC
+```json
+{
+  "world": "worlds/MeuMundo",
+  "http_host": "0.0.0.0",
+  "http_port": 8080,
+  "advertise_host": "auto"
+}
+```
 
-Configurações locais, **data/**, **mapas/**, **logs/**, mundos, capturas e tokens ficam fora do Git. Use o PIN para visitantes da LAN; ações administrativas continuam restritas ao host.
+O trecho mostra apenas os campos a ajustar; preserve os demais campos do arquivo criado. `0.0.0.0` permite escutar nas interfaces do PC. `auto` detecta o endereço anunciado. No próprio PC, use o endereço local exibido; no celular, o endereço LAN do PC e a mesma porta. **127.0.0.1 é válido para acesso local**, mas em outro aparelho aponta para aquele aparelho.
 
-O parser lê snapshots descartáveis, não o LevelDB original. Uma cópia de mundo aberto ainda pode exigir novas tentativas. Bancos SQLite com WAL precisam de backup consistente: veja [dados e backup](docs/GUIA.md#dados-e-backup).
+A conexão do Minecraft tem campos separados: `minecraft_host`, `minecraft_port` e `minecraft_advertise_host`. O padrão local atende ao jogo no mesmo PC. Um IP externo sozinho não fornece o save nem o log de outro servidor. [Rede, PIN e diagnóstico](docs/GUIA.md).
+
+## Limites e dados
+
+O leitor trabalha com snapshots descartáveis do save. O pack lê apenas o terreno acessível no jogo; a seed é previsão, não confirmação de construções. O histórico registra mudanças observadas, não reconstrói o passado. A região principal aceita até **4.096 chunks** e tem limites de armazenamento.
+
+Configurações locais, `data/`, `mapas/`, `logs/` e mundos não acompanham o repositório. Para preservar bancos SQLite abertos, siga o [procedimento de backup](docs/GUIA.md#dados-e-backup). Não há promessa de ganho de FPS ou suporte automático a qualquer Realm/servidor público.
 
 ## Desenvolvimento
 
-O código mora em **src/chiko/**, separado em rede, leitura do mundo, armazenamento, cartografia e interface. Veja a [árvore e o fluxo](docs/ESTRUTURA.md).
-
-~~~powershell
+```powershell
 python -m unittest discover -s tests -v
 node tests/web_smoke.mjs
-node tests/map_editor.mjs
-node tests/map_buildings.mjs
-node tests/pixel_avatars.mjs
-node tests/tile_source.mjs
-node tests/universal_pack.mjs
-~~~
+```
 
-Os testes usam dados temporários e simulações. Não substituem Minecraft, celular ou uma sessão longa. [Como contribuir ou relatar um problema](docs/CONTRIBUINDO.md).
+Os testes usam dados temporários e simulações. Consulte [como contribuir](docs/CONTRIBUINDO.md) para as demais verificações.
 
-## Créditos e licenças
+## Créditos e agradecimentos
 
-- **Arte do atlas:** [Antique Atlas / Hunternif](https://github.com/AntiqueAtlasTeam/AntiqueAtlas), **CC BY-NC-SA 3.0**. As adaptações da arte mantêm atribuição e termos não comerciais.
-- **Personagem Chiko:** [Hachiko / Noah](https://www.tiktok.com/@hachikookami). A pixel art e a capa foram geradas com IA a partir da referência; não são apresentadas como desenhos feitos pelo criador.
+- **Projeto e código:** [murasakll](https://github.com/murasakll).
+- **Personagem Chiko:** [Hachiko / Noah](https://www.tiktok.com/@hachikookami). No DoodleAtlas, ele assume o papel de bibliotecário dos mapas e registros. A pixel art e as ilustrações de apresentação são adaptações geradas com IA a partir das referências fornecidas.
+- **Arte do Atlas:** [Antique Atlas / Hunternif e colaboradores](https://github.com/AntiqueAtlasTeam/AntiqueAtlas), sob **CC BY-NC-SA 3.0**.
+- **Fonte manuscrita:** Caveat, distribuída localmente sob **SIL OFL 1.1**.
+- **Seed opcional:** Cubiomes / Cubitect e SeedForge, com licenças MIT próprias.
+- **Bibliotecas:** Amulet Core, aiohttp, Pillow, qrcode e cryptography.
 
-Fontes, gerador de seed e dependências têm licenças próprias. O código autoral ainda não tem licença geral de reutilização definida; publicar no GitHub não relicencia material de terceiros. [Avisos completos](THIRD_PARTY_NOTICES.md).
+[Licenças, atribuições e alterações de terceiros](THIRD_PARTY_NOTICES.md).
+
+## Licença
+
+O código autoral do **DoodleAtlas** é distribuído sob a [licença MIT](LICENSE): você pode usar, modificar e distribuir esse código mantendo o aviso de autoria e a licença.
+
+A MIT **não substitui as licenças das dependências, fontes e artes**. A arte do Antique Atlas mantém **CC BY-NC-SA 3.0**, inclusive a condição não comercial. O personagem Chiko pertence a Hachiko / Noah e não recebeu licença aberta neste repositório.
 
 Projeto independente, sem afiliação ou endosso da Mojang, Microsoft ou Antique Atlas.

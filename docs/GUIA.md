@@ -1,4 +1,4 @@
-# Usar o Chiko
+# Usar o DoodleAtlas
 
 [Voltar à apresentação](../README.md)
 

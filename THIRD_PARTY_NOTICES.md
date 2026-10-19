@@ -1,4 +1,4 @@
-# Arte de terceiros
+# Cr?ditos e licen?as do DoodleAtlas
 
 ## Antique Atlas
 
@@ -40,4 +40,6 @@ Playwright/Chromium são ferramentas opcionais de captura da galeria. Não estã
 
 ## Código autoral
 
-Não foi escolhida uma licença geral de reutilização para o código autoral deste repositório. A publicação do código e estes créditos não concedem uma licença única sobre código, personagem, fontes e artes de terceiros. Não substitua as licenças específicas por uma licença global presumida.
+O código autoral do DoodleAtlas é Copyright (c) 2026 murasakll e distribuído sob a licença MIT em `LICENSE`. Essa licença cobre o código autoral, não os direitos do personagem Chiko, as artes do Antique Atlas, as fontes ou as dependências, que mantêm seus termos próprios.
+
+O ícone `src/chiko/assets/branding/doodleatlas-icon.png` foi gerado com IA a partir da referência fornecida do Chiko segurando um mapa. É uma adaptação do personagem de Hachiko / Noah, sem declaração de licença aberta ou endosso do criador. O brief está em `docs/images/doodleatlas-icon.prompt.txt`.

@@ -179,7 +179,7 @@
  const mascot=document.createElement('img');mascot.src='/assets/chiko-pixel-v1.png';mascot.className='chiko-pixel';mascot.alt='Chiko em pixel art';
  const context=document.createElement('span');context.className='chiko-context';context.setAttribute('aria-hidden','true');slot.append(mascot,context);
  const brand=document.querySelector('.atlas-brand');
- brand.textContent='▱ Caderno de campo';
+ brand.textContent='▱ DoodleAtlas';
  const chikoSummary=byId('chikoPanel').querySelector('summary');
  const stateLabel=byId('chiko-state-name');stateLabel.classList.add('chiko-state-source');
  const summaryPortrait=document.createElement('img');summaryPortrait.src=mascot.src;summaryPortrait.alt='';summaryPortrait.className='chiko-summary-portrait';

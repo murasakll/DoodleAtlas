@@ -1,4 +1,4 @@
-# Contribuir com o Chiko
+# Contribuir com o DoodleAtlas
 
 Obrigado por ajudar a cuidar do caderno. Comece pelo [guia](GUIA.md) e pela [estrutura](ESTRUTURA.md).
 

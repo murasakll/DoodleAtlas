@@ -557,7 +557,7 @@ class LiveMap:
                                       '/components.html','/components.js','/chiko-design.css',
                                       '/tile-source.js','/map-renderer.js','/pixel-avatars.js','/chiko.js','/timeline.js','/map-editor.js',
                                       '/assets/paper-frame.svg','/assets/Caveat.ttf','/assets/OFL-Caveat.txt',
-                                      '/caderno.html','/caderno-preview.css','/caderno-preview.js','/assets/chiko-pixel-v1.png')
+                                      '/caderno.html','/caderno-preview.css','/caderno-preview.js','/assets/chiko-pixel-v1.png','/assets/doodleatlas-icon.png','/favicon.ico')
             if self.config.get('pin') and not public and self.sessions.get(request.cookies.get('session'), 0) < time.time():
                 raise web.HTTPUnauthorized(text='PIN necessário')
             response = await handler(request)
@@ -583,7 +583,7 @@ class LiveMap:
                 return web.json_response({'is_host':False})
             return web.json_response({'token':self.host_token})
         async def favicon(request):
-            return web.Response(status=204)
+            return web.FileResponse(ASSETS/'branding'/'doodleatlas-icon.png')
         async def worlds(request):
             return web.json_response([{'id':hashlib.sha256(str(Path(w['path']).resolve()).encode()).hexdigest(),'name':w['name']}
                                       for w in await asyncio.to_thread(discover)])
@@ -619,7 +619,8 @@ class LiveMap:
             return web.FileResponse(WEB / name)
         async def asset(request):
             name = request.match_info['asset']
-            return web.FileResponse(ASSETS/('chiko' if name == 'chiko-pixel-v1.png' else 'web')/name)
+            folder = 'branding' if name == 'doodleatlas-icon.png' else ('chiko' if name == 'chiko-pixel-v1.png' else 'web')
+            return web.FileResponse(ASSETS/folder/name)
         async def state(request):
             return web.json_response(self.state())
         def waypoint_writer(request):
@@ -823,7 +824,7 @@ class LiveMap:
                                       'instruction':'No chat do mundo com o pack: /livemap:bioma minecraft:cherry_grove. O resultado da seed aparecerá aqui.'})
         app.router.add_get('/', file)
         app.router.add_get('/{file:app.js|style.css|controls.css|components.html|components.js|chiko-design.css|tile-source.js|map-renderer.js|pixel-avatars.js|chiko.js|timeline.js|map-editor.js|caderno.html|caderno-preview.css|caderno-preview.js}', file)
-        app.router.add_get('/assets/{asset:paper-frame.svg|Caveat.ttf|OFL-Caveat.txt|chiko-pixel-v1.png}',asset)
+        app.router.add_get('/assets/{asset:paper-frame.svg|Caveat.ttf|OFL-Caveat.txt|chiko-pixel-v1.png|doodleatlas-icon.png}',asset)
         app.router.add_post('/api/login', self.login)
         app.router.add_get('/api/state', state)
         app.router.add_get('/api/waypoints',shared_points)
