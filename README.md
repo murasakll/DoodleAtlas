@@ -3,7 +3,7 @@
 <h1 align="center">DoodleAtlas</h1>
 <p align="center"><b>Seu mundo, guardado entre mapas e rabiscos.</b></p>
 <p align="center"><b>Português</b> · <a href="README.en.md">English</a></p>
-<p align="center"><a href="https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer/releases/tag/v0.2.0"><b>Baixar DoodleAtlas</b></a> · <a href="https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer/releases">Todas as versões</a></p>
+<p align="center"><a href="https://github.com/murasakll/DoodleAtlas/releases/tag/v0.2.0"><b>Baixar DoodleAtlas</b></a> · <a href="https://github.com/murasakll/DoodleAtlas/releases">Todas as versões</a></p>
 <p align="center"><a href="docs/GUIA.md">Guia</a> · <a href="docs/GALERIA.md">Galeria</a> · <a href="docs/ESTRUTURA.md">Estrutura</a> · <a href="docs/CONTRIBUINDO.md">Contribuir</a></p>
 
 Mapa interativo para **Minecraft Bedrock** com cara de caderno feito à mão. Veja seu mundo e seus jogadores no navegador, desenhe sua vila por cima e exporte tudo como imagem.
@@ -35,7 +35,7 @@ Mapa interativo para **Minecraft Bedrock** com cara de caderno feito à mão. Ve
 **Você precisa de:** Windows x64 e Minecraft Bedrock. O instalador baixa o Python 3.12 e as dependências sozinho.
 
 ```powershell
-git clone https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer.git DoodleAtlas
+git clone https://github.com/murasakll/DoodleAtlas.git DoodleAtlas
 cd DoodleAtlas
 ```
 
