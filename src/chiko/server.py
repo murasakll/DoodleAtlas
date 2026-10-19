@@ -555,7 +555,7 @@ class LiveMap:
                 raise web.HTTPForbidden(text='Origem não autorizada')
             public = request.path in ('/', '/app.js', '/style.css','/controls.css', '/api/login',
                                       '/components.html','/components.js','/chiko-design.css',
-                                      '/tile-source.js','/map-renderer.js','/pixel-avatars.js','/chiko.js','/timeline.js','/map-editor.js',
+                                      '/locales.js','/i18n.js','/tile-source.js','/map-renderer.js','/pixel-avatars.js','/chiko.js','/timeline.js','/map-editor.js',
                                       '/assets/paper-frame.svg','/assets/Caveat.ttf','/assets/OFL-Caveat.txt',
                                       '/caderno.html','/caderno-preview.css','/caderno-preview.js','/assets/chiko-pixel-v1.png','/assets/doodleatlas-icon.png','/favicon.ico')
             if self.config.get('pin') and not public and self.sessions.get(request.cookies.get('session'), 0) < time.time():
@@ -823,7 +823,7 @@ class LiveMap:
             return web.json_response({'saved':saved,'seed':seed,'seed_value':self.terrain.manifest.get('seed'),
                                       'instruction':'No chat do mundo com o pack: /livemap:bioma minecraft:cherry_grove. O resultado da seed aparecerá aqui.'})
         app.router.add_get('/', file)
-        app.router.add_get('/{file:app.js|style.css|controls.css|components.html|components.js|chiko-design.css|tile-source.js|map-renderer.js|pixel-avatars.js|chiko.js|timeline.js|map-editor.js|caderno.html|caderno-preview.css|caderno-preview.js}', file)
+        app.router.add_get('/{file:locales.js|i18n.js|app.js|style.css|controls.css|components.html|components.js|chiko-design.css|tile-source.js|map-renderer.js|pixel-avatars.js|chiko.js|timeline.js|map-editor.js|caderno.html|caderno-preview.css|caderno-preview.js}', file)
         app.router.add_get('/assets/{asset:paper-frame.svg|Caveat.ttf|OFL-Caveat.txt|chiko-pixel-v1.png|doodleatlas-icon.png}',asset)
         app.router.add_post('/api/login', self.login)
         app.router.add_get('/api/state', state)

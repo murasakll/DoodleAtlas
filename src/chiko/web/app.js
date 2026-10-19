@@ -63,7 +63,7 @@ function tileControls(){
 function cameraChanged(c){
  $('coords').textContent=c.cursor?'Cursor X '+Math.floor(c.cursor.x)+' · Z '+Math.floor(c.cursor.z):'Centro X '+Math.round(c.x)+' · Z '+Math.round(c.z)+' · '+c.scale.toFixed(2)+' px/bloco';
  const p=state?.players?.find(p=>p.id===c.following)||state?.players?.find(p=>p.host)||state?.players?.[0];
- $('playerCoords').textContent=p?p.name+': X '+Math.round(p.x)+' · Y '+Math.round(p.y)+' · Z '+Math.round(p.z):'Sem jogador ao vivo';
+ $('playerCoords').textContent=p?p.name+': X '+Math.round(p.x)+' · Y '+Math.round(p.y)+' · Z '+Math.round(p.z):(globalThis.DoodleAtlasI18n?.t('Sem jogador ao vivo')||'Sem jogador ao vivo');
  $('follow').textContent=c.following?'Seguindo '+(state?.players?.find(p=>p.id===c.following)?.name||'jogador'):'Arraste para explorar';
  for(const[id,value]of [['cameraX',Math.round(c.x)],['cameraZ',Math.round(c.z)],['cameraScale',Number(c.scale.toFixed(2))]])if(document.activeElement!==$(id))$(id).value=value;
  const target=100/c.scale,power=10**Math.floor(Math.log10(target));let blocks=power;for(const n of [1,2,5])if(n*power<=target)blocks=n*power;
@@ -226,3 +226,5 @@ $('themeMode').onchange=()=>{themePreference=['light','dark'].includes($('themeM
 const themeChanged=()=>{if(themePreference==='system')applyTheme()};
 if(systemTheme?.addEventListener)systemTheme.addEventListener('change',themeChanged);else systemTheme?.addListener?.(themeChanged);
 applyTheme();styleChanged();filtersChanged();rateCommand();connect().catch(fail);
+
+document.addEventListener("doodleatlas:language",()=>{editor.syncPalettes();map.invalidateOverlay();if(!state?.players?.length)$('playerCoords').textContent=globalThis.DoodleAtlasI18n.t('Sem jogador ao vivo');});

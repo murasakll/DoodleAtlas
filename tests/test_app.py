@@ -113,7 +113,7 @@ class Integration(unittest.IsolatedAsyncioTestCase):
     async def test_component_gallery_and_local_assets_without_game_data(self):
         # The public demo contains sample data only; protected APIs stay protected.
         for path in ('/components.html','/components.js','/chiko-design.css',
-                     '/tile-source.js','/map-renderer.js','/pixel-avatars.js','/chiko.js',
+                     '/locales.js','/i18n.js','/tile-source.js','/map-renderer.js','/pixel-avatars.js','/chiko.js',
                      '/assets/paper-frame.svg','/assets/Caveat.ttf','/assets/OFL-Caveat.txt',
                      '/assets/doodleatlas-icon.png','/favicon.ico'):
             response=await self.client.get(path)

@@ -20,7 +20,7 @@ Personagem atribuído a **Hachiko / Noah**: <https://www.tiktok.com/@hachikookam
 
 `src/chiko/assets/chiko/chiko-pixel-v1.png` é uma recriação em pixel art gerada com IA a partir da referência fornecida do personagem. `docs/images/chiko-banner.png` é uma ilustração de apresentação gerada com IA usando essa identidade. Não são apresentadas como desenhos executados pelo criador original. A autoria do personagem continua atribuída a Hachiko / Noah; não foi declarada uma licença aberta para ele nem um endosso do projeto.
 
-Os seis prints em `docs/images/` foram capturados da interface executada com dados sintéticos. Quando exibem arte do Antique Atlas, essa parte mantém CC BY-NC-SA 3.0 e os créditos acima. A capa é ilustração, não screenshot. O brief está em `docs/images/chiko-banner.prompt.txt`.
+Os prints em `docs/images/` foram capturados da interface executada com dados sintéticos. Quando exibem arte do Antique Atlas, essa parte mantém CC BY-NC-SA 3.0 e os créditos acima. A capa é ilustração, não screenshot. O brief está em `docs/images/chiko-banner.prompt.txt`.
 
 ## Fonte Caveat
 

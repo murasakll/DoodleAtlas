@@ -149,7 +149,7 @@ globalThis.MapRenderer=class MapRenderer{
    if(antique)this.antiqueFrame(c,width,height);
    c.fillStyle=antique?'#61492f':'#263e4b';c.textAlign='left';c.font=antique?'bold 22px Georgia, serif':'bold 22px system-ui';
    c.fillText(fit(String(title).trim().slice(0,80)||world,width-110),24,32);
-   c.font='11px system-ui';c.fillText(fit(world+' · '+dimension+' · '+date.toLocaleString('pt-BR'),width-48),24,55);
+   c.font='11px system-ui';c.fillText(fit(world+' · '+dimension+' · '+date.toLocaleString(globalThis.DoodleAtlasI18n?.language||'pt-BR'),width-48),24,55);
    c.font='bold 12px system-ui';c.textAlign='center';c.fillText('N',width-45,22);
    if(antique)this.compassRose(c,width-45,45,17);else{c.font='28px system-ui';c.fillText('↑',width-45,50)}
    c.imageSmoothingEnabled=this.style.palette!=='atlas'&&this.filters.smooth;
@@ -179,16 +179,16 @@ globalThis.MapRenderer=class MapRenderer{
    const west=camera.x-this.width/(2*camera.scale),east=camera.x+this.width/(2*camera.scale),north=camera.z-this.height/(2*camera.scale),south=camera.z+this.height/(2*camera.scale);
    c.textAlign='left';c.font='11px system-ui';c.fillStyle='#263e4b';const footer=top+mapHeight;
    c.fillText(fit('X '+Math.floor(west)+' … '+Math.ceil(east)+' · Z '+Math.floor(north)+' … '+Math.ceil(south),width-48),24,footer+25);
-   c.fillText(fit('Superfície observada · papel vazio = sem dados · anotações: '+waypointCount,width-48),24,footer+46);
+   c.fillText(fit((globalThis.DoodleAtlasI18n?.t('Superfície observada · papel vazio = sem dados · anotações:')||'Superfície observada · papel vazio = sem dados · anotações:')+' '+waypointCount,width-48),24,footer+46);
    const scale=camera.scale*factor,target=90/scale,power=10**Math.floor(Math.log10(target));let blocks=power;for(const n of [1,2,5])if(n*power<=target)blocks=n*power;
-   const barWidth=blocks*scale;c.beginPath();c.strokeStyle='#263e4b';c.lineWidth=1.5;c.moveTo(24,footer+62);c.lineTo(24,footer+69);c.lineTo(24+barWidth,footer+69);c.lineTo(24+barWidth,footer+62);c.stroke();c.font='10px system-ui';c.fillText(blocks+' blocos',24,footer+85);
-   c.fillText('Chiko · Cartógrafo',Math.max(24,width-140),footer+85);
+   const barWidth=blocks*scale;c.beginPath();c.strokeStyle='#263e4b';c.lineWidth=1.5;c.moveTo(24,footer+62);c.lineTo(24,footer+69);c.lineTo(24+barWidth,footer+69);c.lineTo(24+barWidth,footer+62);c.stroke();c.font='10px system-ui';c.fillText(globalThis.DoodleAtlasI18n?.t(blocks+' blocos')||blocks+' blocos',24,footer+85);
+   c.fillText(globalThis.DoodleAtlasI18n?.t('Chiko · Cartógrafo')||'Chiko · Cartógrafo',Math.max(24,width-140),footer+85);
    const artwork=this.style.palette==='atlas'?{project:'Antique Atlas',author:'Hunternif',license:'CC BY-NC-SA 3.0',licenseUrl:'https://creativecommons.org/licenses/by-nc-sa/3.0/',source:'https://github.com/AntiqueAtlasTeam/AntiqueAtlas',commit:'b706821d3f0203038de3de6e79a6d354fe2c7b18',changes:'Cores, recortes e composição adaptados'}:null;
    if(artwork){
     const credit='Arte adaptada: Antique Atlas / Hunternif · CC BY-NC-SA 3.0';
     c.font='8px system-ui';const measured=c.measureText(credit).width;
     if(measured>width-48)c.font=Math.max(5,8*(width-48)/measured)+'px system-ui';
-    c.fillText(credit,24,footer+99);
+    c.fillText(globalThis.DoodleAtlasI18n?.t(credit)||credit,24,footer+99);
     c.font='8px system-ui';c.fillText('github.com/AntiqueAtlasTeam/AntiqueAtlas',24,footer+110);
     c.fillText('creativecommons.org/licenses/by-nc-sa/3.0/',24,footer+121);
    }

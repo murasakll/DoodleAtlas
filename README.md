@@ -1,5 +1,7 @@
 <p align="center"><img src="src/chiko/assets/branding/doodleatlas-icon.png" alt="Mapa desenhado à mão com Chiko segurando o canto" width="220"></p>
 
+**Português** · [English](README.en.md)
+
 # DoodleAtlas
 
 **Seu mundo, guardado entre mapas e rabiscos.**
@@ -13,6 +15,7 @@ DoodleAtlas é uma ferramenta de cartografia interativa para **Minecraft Bedrock
 ## Destaques
 
 - **Caderno doodle:** temas claro, escuro e automático, bordas sketch e sons opcionais.
+- **Português / English:** escolha em O seu mapa; o idioma fica salvo neste navegador.
 - **Dois estilos de terreno:** Atlas ilustrado ou Minecraft com cores naturais e relevo.
 - **Editor manual:** pincéis, estradas e cercas conectáveis, carimbos, pintura de fundo e construções modulares.
 - **Três dimensões:** Overworld, Nether e End.
@@ -117,6 +120,10 @@ O leitor trabalha com snapshots descartáveis do save. O pack lê apenas o terre
 Configurações locais, `data/`, `mapas/`, `logs/` e mundos não acompanham o repositório. Para preservar bancos SQLite abertos, siga o [procedimento de backup](docs/GUIA.md#dados-e-backup). Não há promessa de ganho de FPS ou suporte automático a qualquer Realm/servidor público.
 
 ## Desenvolvimento
+
+Quer dar seu tom aos textos? [Veja onde editar a escrita e as traduções](docs/TEXTOS.md). A apresentação em português e inglês fica em arquivos separados para facilitar sua revisão.
+
+No site, abra **O seu mapa → Idioma**. Na primeira visita, o idioma acompanha o navegador quando compatível; depois vale a sua escolha salva. Nomes e comandos permanecem como foram escritos. Diagnósticos técnicos das bibliotecas podem aparecer no idioma original.
 
 ```powershell
 python -m unittest discover -s tests -v

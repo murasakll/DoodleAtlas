@@ -128,10 +128,11 @@ class MapEditor{
  syncPalettes(){
   const text=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const query=text(this.el('editObjectSearch').value||''),category=this.el('editObjectCategory').value||'buildings',building=this.buffer?.model.structures.get(this.buffer?.selectedBuilding);let visible=0;
-  const signature=JSON.stringify([this.world,this.workspace,this.canWrite(),this.el('editTool').value,building?.id,building?.icon,category,query,this.paletteButtons.length]);if(signature===this.paletteSignature)return;this.paletteSignature=signature;
+  const signature=JSON.stringify([globalThis.DoodleAtlasI18n?.language,this.world,this.workspace,this.canWrite(),this.el('editTool').value,building?.id,building?.icon,category,query,this.paletteButtons.length]);if(signature===this.paletteSignature)return;this.paletteSignature=signature;
   for(const entry of this.paletteButtons){
    const{button,kind,purpose}=entry;
-   button.hidden=purpose==='map'&&((!query&&category!=='all'&&entry.category!==category)||!text(AtlasKinds[kind]||kind).includes(query));
+   const label=AtlasKinds[kind]||kind,translated=globalThis.DoodleAtlasI18n?.t(label)||label;
+   button.hidden=purpose==='map'&&((!query&&category!=='all'&&entry.category!==category)||!text(label+' '+translated).includes(query));
    if(purpose==='map'&&!button.hidden)visible++;
    button.disabled=kind!=='pan'&&(!this.canWrite()||purpose!=='map'&&!building);
    button.setAttribute('aria-pressed',String(purpose==='icon'?building?.icon===kind:this.el('editTool').value===kind&&this.workspace===purpose));

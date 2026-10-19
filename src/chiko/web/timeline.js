@@ -62,7 +62,7 @@ class MapTimeline {
    this.el('historyPlay').disabled=this.frames.length<2;
    this.show(Math.max(0,selected?this.frames.findIndex(f=>f.id===selected):this.frames.length-1));
    const list=this.el('historyChanges');list.replaceChildren();
-   for(const event of data.recent||[]){const row=document.createElement('div'),b=document.createElement('button'),locate=document.createElement('button');b.type=locate.type='button';b.className=locate.className='button';b.textContent=new Date(event.at*1000).toLocaleTimeString()+' · '+(event.origin==='save'?'Save':'Captura')+' · chunk '+event.x+', '+event.z;b.onclick=()=>this.showChange(event);locate.textContent='Localizar';locate.onclick=()=>{this.stop();this.el('historyDialog').close();this.onGo({x:event.x*16+8,z:event.z*16+8,dimension:event.dimension,scale:2})};row.append(b,locate);list.append(row)}
+   for(const event of data.recent||[]){const row=document.createElement('div'),b=document.createElement('button'),locate=document.createElement('button');b.type=locate.type='button';b.className=locate.className='button';b.textContent=new Date(event.at*1000).toLocaleTimeString(globalThis.DoodleAtlasI18n?.language||'pt-BR')+' · '+(event.origin==='save'?'Save':'Captura')+' · chunk '+event.x+', '+event.z;b.onclick=()=>this.showChange(event);locate.textContent='Localizar';locate.onclick=()=>{this.stop();this.el('historyDialog').close();this.onGo({x:event.x*16+8,z:event.z*16+8,dimension:event.dimension,scale:2})};row.append(b,locate);list.append(row)}
   }catch(error){if(world===this.getState()?.world_id)this.el('historyMessage').textContent=error.message}
  }
  show(index){
@@ -70,12 +70,12 @@ class MapTimeline {
   if(!frame){image.removeAttribute?.('src');this.el('historyCaption').textContent='Ainda não há quadros nesta dimensão. Use “Registrar quadro agora” ou aguarde o intervalo automático.';return}
   const url='/api/history/frames/'+frame.id+'.webp?world_id='+encodeURIComponent(this.world);
   image.className='history-image';image.src=url;this.el('historyDownload').href=url;this.el('historyDownload').download='mapa-'+this.world.slice(0,12)+'-'+frame.id+'.webp';
-  this.el('historyCaption').textContent=new Date(frame.at*1000).toLocaleString()+' · '+frame.width+' × '+frame.height+' px · X '+frame.min_x+' a '+frame.max_x+' · Z '+frame.min_z+' a '+frame.max_z;
+  this.el('historyCaption').textContent=new Date(frame.at*1000).toLocaleString(globalThis.DoodleAtlasI18n?.language||'pt-BR')+' · '+frame.width+' × '+frame.height+' px · X '+frame.min_x+' a '+frame.max_x+' · Z '+frame.min_z+' a '+frame.max_z;
  }
  showChange(event){
   this.stop();const url='/api/history/changes/'+event.id+'.webp?world_id='+encodeURIComponent(this.world),image=this.el('historyImage');
   image.className='history-image history-image--chunk';image.hidden=false;image.src=url;this.el('historyDownload').hidden=false;this.el('historyDownload').href=url;this.el('historyDownload').download='chunk-'+event.x+'-'+event.z+'-'+event.id+'.webp';
-  this.el('historyCaption').textContent='Versão observada do chunk '+event.x+', '+event.z+' · dimensão '+event.dimension+' · '+new Date(event.at*1000).toLocaleString()+' · '+(event.origin==='save'?'save':'captura')+' · 16 × 16 blocos. Não altera o mundo nem o mapa atual.';
+  this.el('historyCaption').textContent='Versão observada do chunk '+event.x+', '+event.z+' · dimensão '+event.dimension+' · '+new Date(event.at*1000).toLocaleString(globalThis.DoodleAtlasI18n?.language||'pt-BR')+' · '+(event.origin==='save'?'save':'captura')+' · 16 × 16 blocos. Não altera o mundo nem o mapa atual.';
  }
  step(){if(!this.playing||document.hidden){this.stop();return}const i=Number(this.el('historyFrame').value);this.show((i+1)%this.frames.length);this.timer=setTimeout(()=>this.step(),1500)}
 }

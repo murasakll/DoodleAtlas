@@ -215,3 +215,5 @@ body.caderno-ui.map-ui[data-theme=dark][data-appearance]{--paper:#242628;--sheet
 .caderno-ui.map-ui .map-scale{bottom:235px;transform:none;max-width:140px}
 @media(min-width:721px) and (max-width:1150px){.caderno-ui.map-ui .map-scale{bottom:283px}}
 @media(max-width:720px){.caderno-ui.map-ui[data-theme] .atlas-title{width:46vw;max-width:210px;padding:9px 10px;gap:6px}.caderno-ui.map-ui .atlas-brand{font-size:18px;min-height:32px}.caderno-ui.map-ui[data-theme] .atlas-title h1{font-size:24px}.caderno-ui.map-ui .atlas-title #connection{font-size:9px;padding-top:5px}.caderno-ui.map-ui .chiko-corner{width:255px;max-width:calc(100vw - 115px)}.caderno-ui.map-ui .chiko-corner>summary{gap:7px;padding:8px;min-height:64px}.caderno-ui .chiko-summary-portrait{width:38px;height:38px;flex-basis:38px}.caderno-ui .chiko-summary-copy strong{font-size:24px}.caderno-ui .chiko-summary-copy .chiko-summary-state{font-size:10px}.caderno-ui.map-ui .chiko-corner .chiko-content{flex-wrap:wrap}.caderno-ui.map-ui .chiko-corner .chiko-placeholder{display:none}}
+
+.caderno-ui .language-field{margin-bottom:16px}.caderno-ui #languageSelect{width:100%}

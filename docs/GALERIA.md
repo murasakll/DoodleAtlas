@@ -2,6 +2,14 @@
 
 [Voltar ao projeto](../README.md)
 
+[English presentation](../README.en.md)
+
+## English
+
+The same notebook with English controls and a language selector. Terrain and places are synthetic demonstration data.
+
+![English interface](images/07-english.png)
+
 Estas são capturas da interface real, executada em Chromium com terreno, jogadores e lugares **sintéticos**. Nenhum save ou jogador real foi usado. Elas mostram a apresentação das funções; não medem FPS nem comprovam a conexão de uma sessão Minecraft.
 
 ## Atlas
