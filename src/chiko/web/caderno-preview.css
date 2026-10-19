@@ -1,0 +1,217 @@
+/* Alternate notebook shell. The renderer and its two canvases stay untouched. */
+body.caderno-ui.map-ui[data-theme][data-appearance]{--paper:#fff;--sheet:#fff;--sheet-back:#ededea;--sheet-edge:#29251f;--sheet-shadow:#deded9;--sheet-heading:#fff;--field-paper:#fff;--tab-paper:#b5e7ef;--ink:#29251f;--muted:#626262;--cyan:#b5e7ef;--rule:transparent;--margin-rule:transparent;--line:1px solid var(--ink);--cutout:2px 3px 0 var(--sheet-shadow)}
+body.caderno-ui.map-ui[data-theme=dark][data-appearance]{--paper:#242628;--sheet:#242628;--sheet-back:#17191b;--sheet-edge:#f4eddd;--sheet-shadow:#111;--sheet-heading:#242628;--field-paper:#242628;--tab-paper:#394b50;--ink:#f4eddd;--muted:#c5c6c7}
+.caderno-ui.map-ui[data-theme][data-appearance] .paper,.caderno-ui.map-ui[data-theme] .input,.caderno-ui.map-ui[data-theme] .button{background:var(--paper);background-image:none;border:1px solid var(--ink);border-image:none;border-radius:2px 1px 3px 1px;box-shadow:2px 3px 0 var(--sheet-shadow);color:var(--ink)}
+.caderno-ui.map-ui[data-theme] .floating-panel>summary,.caderno-ui.map-ui[data-theme] .nested-panel summary{background:var(--paper);color:var(--ink);font:25px/1.2 var(--hand);min-height:44px}
+.caderno-ui.map-ui[data-theme] .paper-frame .panel-content{padding:16px}.caderno-ui.map-ui[data-theme] .paper-frame{border-width:7px}
+.caderno-ui.map-ui[data-theme] .atlas-title h1{font:34px/1 var(--hand)}.caderno-ui.map-ui[data-theme] .atlas-title{padding:12px 18px;max-width:240px}
+.caderno-ui.map-ui .atlas-header{top:16px}.caderno-ui.map-ui .header-actions .button,.caderno-ui.map-ui .dimension-tabs button{font:23px/1 var(--hand)}
+.caderno-ui.map-ui .button,.caderno-ui.map-ui .book-tabs button,.caderno-ui.map-ui #zoom-nav button{font:23px/1.15 var(--hand);min-height:44px}
+.caderno-ui.map-ui .button:hover:not(:disabled),.caderno-ui.map-ui .book-tabs button:hover:not(:disabled){background:var(--tab-paper)}
+.caderno-ui.map-ui .button:active,.caderno-ui.map-ui .book-tabs button:active{transform:translate(1px,2px) rotate(-1deg)}
+.caderno-ui.map-ui .note,.caderno-ui.map-ui p,.caderno-ui.map-ui .field,.caderno-ui.map-ui .check{font-size:13px;line-height:1.5}.caderno-ui.map-ui .input{font-size:14px;min-height:44px;box-shadow:none}
+.caderno-ui.map-ui .panel-stack{top:132px;bottom:194px;width:290px}.caderno-ui.map-ui .panel-stack--right{top:98px}
+.caderno-ui.map-ui .mobile-dock{display:none!important}.caderno-ui.map-ui .chiko-corner{bottom:108px;max-width:320px}
+.caderno-ui.map-ui #unknownLegend{bottom:113px;left:350px;max-width:calc(100vw - 710px);background:var(--paper);color:var(--ink)}
+.caderno-ui.map-ui #zoom-nav{bottom:106px}.caderno-ui.map-ui .map-scale{bottom:190px;background:var(--paper);color:var(--ink)}
+.caderno-ui .book-tabs{position:fixed;z-index:5;left:50%;bottom:55px;transform:translateX(-50%);display:flex;gap:7px;max-width:calc(100vw - 24px);padding:7px;overflow-x:auto;scrollbar-width:thin}
+.caderno-ui .book-tabs button{position:relative;white-space:nowrap;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:9px 12px;min-height:44px;cursor:pointer}
+.caderno-ui .book-tabs button[aria-expanded=true],.caderno-ui .book-tabs button[aria-pressed=true]{background:var(--tab-paper)}
+.caderno-ui .preview-settings{position:fixed;z-index:6;top:81px;left:50%;transform:translateX(-50%);max-width:min(540px,calc(100vw - 28px));padding:8px 12px}
+.caderno-ui .preview-settings>summary{font:21px var(--hand);cursor:pointer}.caderno-ui .preview-options{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding:12px 0}.caderno-ui .preview-options button{font:20px var(--hand);background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:8px;min-height:44px}.caderno-ui .preview-options input{width:110px;vertical-align:middle;min-height:44px}.caderno-ui .preview-return{font-size:12px!important}
+.caderno-ui .preview-options label{font-size:13px}.caderno-ui .preview-status{font-size:12px!important;max-width:380px}
+.caderno-ui.map-ui .chiko-placeholder{display:block;width:90px;height:100px;background:#fff;border:1px dashed #aaa;position:relative;flex-shrink:0}
+.caderno-ui .chiko-pixel{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}.caderno-ui .chiko-context{position:absolute;right:1px;top:1px;background:#fff;color:#29251f;font:24px var(--hand);padding:0 4px}
+.caderno-ui.map-ui[data-theme] .bubble{font:23px/1.2 var(--hand);background:var(--paper);border:1px dashed var(--ink);color:var(--ink)}
+.caderno-ui .live-sketch{position:absolute;overflow:visible;pointer-events:none;fill:none;z-index:1;color:var(--ink)}.caderno-ui .live-sketch path{stroke:currentColor;stroke-width:1.3;stroke-linecap:butt;stroke-linejoin:miter;vector-effect:non-scaling-stroke}
+.caderno-ui button.sketch-button-static{position:relative}
+.caderno-ui button.live-sketch-ready{border-image:none!important;border-radius:0!important;box-shadow:none!important}
+.caderno-ui button>.live-sketch{overflow:hidden;color:inherit}
+.caderno-ui .live-sketch-ready{border-color:transparent!important}.caderno-ui details.live-sketch-ready:not([open]){border-color:var(--ink)!important}.caderno-ui .live-arrival{position:fixed;inset:6px;z-index:2;pointer-events:none;border:3px dashed var(--event-ink,#b5e7ef);opacity:0}
+.caderno-ui.motion-on .live-arrival.entering{animation:live-arrival 1.1s steps(4,end)}@keyframes live-arrival{0%{opacity:0;clip-path:inset(0 100% 0 0)}35%{opacity:1;clip-path:inset(0)}100%{opacity:0}}
+.caderno-ui.focus-map .panel-stack,.caderno-ui.focus-map #editorPanel,.caderno-ui.focus-map #buildingPanel,.caderno-ui.focus-map .chiko-corner,.caderno-ui.focus-map .header-actions,.caderno-ui.focus-map #unknownLegend{display:none!important}
+.caderno-ui.focus-map .book-tabs button[data-book-panel]{display:none}.caderno-ui.focus-map .compass{right:24px}
+@media(max-width:720px){.caderno-ui.map-ui .atlas-header{left:10px;right:10px}.caderno-ui.map-ui .atlas-title{max-width:47vw;padding:10px}.caderno-ui.map-ui[data-theme] .atlas-title h1{font-size:27px}.caderno-ui.map-ui .header-actions .button{font-size:18px}.caderno-ui.map-ui .dimension-tabs button{font-size:18px;min-height:30px}.caderno-ui .preview-settings{top:112px}.caderno-ui.map-ui .panel-stack{top:160px;bottom:200px;width:calc(100vw - 24px)}.caderno-ui.map-ui .panel-stack--right{top:160px}.caderno-ui.map-ui .floating-panel{max-width:100%}.caderno-ui .book-tabs{left:10px;right:10px;transform:none;max-width:none;bottom:53px}.caderno-ui .book-tabs button{font-size:20px;padding:7px 10px}.caderno-ui.map-ui #zoom-nav{bottom:113px}.caderno-ui.map-ui .chiko-corner{left:12px;bottom:169px;max-width:270px}.caderno-ui.map-ui #unknownLegend{display:none}.caderno-ui.map-ui .map-scale{bottom:234px}.caderno-ui.map-ui .map-footer{font-size:10px;bottom:8px}.caderno-ui.map-ui .compass{bottom:170px}.caderno-ui .chiko-content{max-height:28vh;overflow:auto}}
+@media(prefers-reduced-motion:reduce){.caderno-ui .live-arrival{animation:none!important}}
+
+/* Explicit workbench geometry: old dock rules must not position the preview. */
+.caderno-ui *, .caderno-ui *::before, .caderno-ui *::after{box-sizing:border-box}
+.caderno-ui.map-ui[data-theme] .panel-stack,.caderno-ui.map-ui[data-theme] .panel-stack--right{display:contents}
+.caderno-ui.map-ui[data-theme] .floating-panel{display:none;position:fixed;left:auto;right:20px;top:126px;bottom:auto;width:340px;max-width:calc(100vw - 40px);max-height:calc(100dvh - 306px);margin:0;transform:none;overflow-x:hidden;overflow-y:auto;scrollbar-gutter:stable;z-index:5}
+.caderno-ui.map-ui[data-theme] .floating-panel[open]{display:block;position:fixed;left:auto;right:20px;top:126px;bottom:auto;width:340px;max-width:calc(100vw - 40px);max-height:calc(100dvh - 306px);transform:none}
+.caderno-ui.map-ui[data-theme] .floating-panel>summary{position:sticky;top:0;padding:12px;z-index:2;background:var(--paper)}
+.caderno-ui.map-ui .panel-content,.caderno-ui.map-ui .field,.caderno-ui.map-ui .input,.caderno-ui.map-ui form{min-width:0;max-width:100%}
+.caderno-ui.map-ui[data-theme] .atlas-header{inset:16px 20px auto;align-items:flex-start;min-height:84px}
+.caderno-ui.map-ui[data-theme] .atlas-title{position:relative;max-width:250px;min-width:0}
+.caderno-ui.map-ui[data-theme] .dimension-tabs{top:8px}
+.caderno-ui.map-ui .book-tabs{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:5px;left:50%;right:auto;bottom:64px;width:min(1100px,calc(100vw - 40px));max-width:none;transform:translateX(-50%);overflow:visible;padding:7px;min-height:60px}
+.caderno-ui.map-ui .book-tabs button{min-width:0;padding:8px 5px;font-size:21px;white-space:nowrap}
+.caderno-ui.map-ui #openHistory{display:none!important}
+.caderno-ui.map-ui[data-theme] .map-footer{position:fixed;left:20px;right:20px;bottom:12px;width:auto;max-width:none;min-height:34px;padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between}
+.caderno-ui.map-ui .map-footer #follow{display:block}
+.caderno-ui.map-ui #zoom-nav{right:20px;bottom:146px;display:grid;grid-template-columns:repeat(2,minmax(44px,auto));gap:3px;border-radius:2px}
+.caderno-ui.map-ui #zoom-nav button{min-height:40px;font-size:19px;padding:6px 9px;min-width:44px}
+.caderno-ui.map-ui #zoom-nav #fit{grid-column:1/-1}
+.caderno-ui.map-ui .chiko-corner{left:20px;bottom:146px;max-width:310px}
+.caderno-ui.map-ui #unknownLegend{left:350px;right:165px;bottom:144px;transform:none;max-width:none;width:max-content;max-width:calc(100vw - 530px);text-align:left}
+.caderno-ui.map-ui .map-scale{left:20px;bottom:132px;transform:translateY(-100%)}
+.caderno-ui.map-ui:has(.chiko-corner[open]) .map-scale{display:none}
+.caderno-ui.map-ui .compass{right:35px;bottom:300px;top:auto}
+.caderno-ui .preview-settings{top:77px;max-width:calc(100vw - 40px)}
+.caderno-ui.map-ui .selection-card{left:50%;right:auto;bottom:140px;transform:translateX(-50%);width:300px;max-width:calc(100vw - 40px)}
+.caderno-ui.map-ui.focus-map .book-tabs{width:auto;grid-template-columns:repeat(2,minmax(100px,auto))}
+@media(min-width:721px) and (max-width:1150px){.caderno-ui.map-ui .book-tabs{grid-template-columns:repeat(5,minmax(0,1fr));width:650px}.caderno-ui.map-ui[data-theme] .floating-panel[open]{max-height:calc(100dvh - 360px)}.caderno-ui.map-ui .chiko-corner,.caderno-ui.map-ui #zoom-nav{bottom:195px}.caderno-ui.map-ui #unknownLegend{bottom:190px}.caderno-ui.map-ui .map-scale{bottom:185px}.caderno-ui.map-ui .selection-card{bottom:195px}}
+@media(max-width:720px){
+ .caderno-ui.map-ui[data-theme] .atlas-header{inset:10px 12px auto;min-height:110px;gap:8px}
+ .caderno-ui.map-ui[data-theme] .atlas-title{width:46vw;max-width:210px;padding:8px 10px}.caderno-ui.map-ui[data-theme] .atlas-title h1{font-size:23px}
+ .caderno-ui.map-ui[data-theme] .dimension-tabs{left:auto;right:0;top:62px;transform:none}.caderno-ui.map-ui .dimension-tabs button{font-size:18px;padding:5px 9px}
+ .caderno-ui .preview-settings{left:12px;top:116px;transform:none;max-width:calc(100vw - 24px)}.caderno-ui .preview-settings>summary{font-size:18px}
+ .caderno-ui.map-ui[data-theme] .floating-panel[open]{left:12px;right:12px;top:166px;width:auto;max-width:none;max-height:calc(100dvh - 345px)}
+ .caderno-ui.map-ui .book-tabs{left:12px;right:12px;bottom:62px;width:auto;transform:none;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:5px;min-height:0}
+ .caderno-ui.map-ui .book-tabs button{font-size:17px;padding:6px 2px;min-height:38px;white-space:normal;overflow-wrap:anywhere}
+ .caderno-ui.map-ui[data-theme] .map-footer{left:12px;right:12px;bottom:8px;min-height:38px;padding:6px 9px;font-size:9px}.caderno-ui.map-ui #playerCoords{display:block}.caderno-ui.map-ui .map-footer #follow{display:none}
+ .caderno-ui.map-ui .chiko-corner{left:12px;bottom:170px;max-width:min(260px,calc(100vw - 115px))}.caderno-ui.map-ui #zoom-nav{right:12px;bottom:170px;grid-template-columns:1fr}.caderno-ui.map-ui #zoom-nav button{font-size:17px;min-height:36px}
+ .caderno-ui.map-ui .compass,.caderno-ui.map-ui #unknownLegend,.caderno-ui.map-ui .map-scale{display:none}.caderno-ui.map-ui .selection-card{bottom:170px}
+ .caderno-ui.map-ui.focus-map .book-tabs{left:50%;right:auto;transform:translateX(-50%);width:240px}
+}
+
+/* Keep the sheet frame outside its scrolling content. */
+.caderno-ui.map-ui[data-theme] #layersPanel[open]{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--ink);padding:4px;scrollbar-gutter:auto}
+.caderno-ui.map-ui[data-theme] #layersPanel>summary{position:relative;flex:0 0 auto;padding:13px 12px;border-bottom:1px dashed var(--sheet-edge);font-size:27px;list-style:none}
+.caderno-ui.map-ui[data-theme] #layersPanel>.panel-content{display:flex;flex-direction:column;gap:18px;overflow-x:hidden;overflow-y:auto;min-height:0;padding:16px 13px;scrollbar-width:thin;scrollbar-gutter:stable;overscroll-behavior:contain}
+.caderno-ui .map-option-group{display:grid;gap:12px;min-width:0;margin:0;padding:0 0 17px;border-bottom:1px dashed var(--sheet-edge)}
+.caderno-ui .map-option-group h3{font:24px/1.2 var(--hand);margin:0;color:var(--ink)}
+.caderno-ui.map-ui .map-option-group .field{margin:0;gap:6px;font-size:12px}.caderno-ui.map-ui .map-option-group .note,.caderno-ui.map-ui .map-option-group .caption{margin:0;font-size:11px;line-height:1.5;color:var(--muted)}
+.caderno-ui .map-option-group .preview-choice-source{display:none}
+.caderno-ui .map-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;border:0;margin:0;padding:0;min-width:0}
+.caderno-ui .map-choices:last-of-type{grid-template-columns:repeat(3,minmax(0,1fr))}
+.caderno-ui .map-choices legend{font:12px/1.4 var(--body);padding:0 0 8px;color:var(--muted)}
+.caderno-ui.map-ui .map-choice{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;background:var(--paper);color:var(--ink);min-width:0;min-height:60px;padding:9px 6px;border:1px solid var(--ink);cursor:pointer}
+.caderno-ui .map-choice strong{font:23px/1.1 var(--hand);font-weight:400}.caderno-ui .map-choice small{font:10px/1.4 var(--body);white-space:normal}
+.caderno-ui.map-ui .map-choice[aria-pressed=true]{background:var(--tab-paper)}
+.caderno-ui.map-ui .map-option-group .check{margin:0;display:flex;align-items:center;gap:12px;min-height:48px;padding:10px;border:1px dashed var(--sheet-edge);font-size:12px;line-height:1.4;background:var(--field-paper)}
+.caderno-ui .map-option-group input[type=checkbox]{width:19px;height:19px;flex:0 0 19px;margin:0;accent-color:#537e87}
+.caderno-ui.map-ui #layersPanel .nested-panel{border:0;border-top:1px dashed var(--sheet-edge);padding:0;margin:0}
+.caderno-ui.map-ui #layersPanel .nested-panel>summary{padding:10px 2px;min-height:42px;font:23px/1.2 var(--hand)}
+.caderno-ui.map-ui #layersPanel .map-credits>summary{font:19px/1.3 var(--hand);min-height:36px;padding:7px 0}
+.caderno-ui.map-ui #layersPanel #observedPointsStatus{padding:0 3px;font-size:10px}
+/* A details element has an anonymous content box: use explicit bounds, not flex shrink. */
+.caderno-ui.map-ui[data-theme] .floating-panel[open],.caderno-ui.map-ui[data-theme] #layersPanel[open]{display:block;position:fixed;top:126px;bottom:152px;height:auto;max-height:none;width:370px;max-width:calc(100vw - 40px);padding:5px;overflow:hidden;border:1px solid var(--ink);scrollbar-gutter:auto}
+.caderno-ui.map-ui[data-theme] .floating-panel>summary,.caderno-ui.map-ui[data-theme] #layersPanel>summary{position:relative;margin:0;padding:12px 14px;min-height:52px;font:27px/1.15 var(--hand);border-bottom:1px dashed var(--sheet-edge);list-style:none}
+.caderno-ui.map-ui[data-theme] .floating-panel>.panel-content,.caderno-ui.map-ui[data-theme] #layersPanel>.panel-content{position:absolute;top:calc(var(--panel-heading-height,56px) + 10px);bottom:8px;left:8px;right:8px;display:flex;flex-direction:column;gap:15px;min-height:0;height:auto;max-height:none;padding:10px 13px;overflow-x:hidden;overflow-y:auto;scrollbar-gutter:auto;overscroll-behavior:contain}
+.caderno-ui.map-ui .panel-content>*{flex-shrink:0}
+.caderno-ui.map-ui .floating-panel .field{display:grid;gap:7px;margin:0;font:12px/1.4 var(--body);color:var(--ink)}
+.caderno-ui.map-ui .floating-panel .input,.caderno-ui.map-ui dialog .input{width:100%;min-height:44px;border:1px solid var(--ink);border-radius:2px;background:var(--field-paper);color:var(--ink);padding:9px 10px;box-shadow:none;font:14px/1.4 var(--body)}
+.caderno-ui.map-ui .floating-panel .check,.caderno-ui.map-ui dialog .check{display:flex;gap:10px;align-items:flex-start;min-height:42px;padding:9px 10px;border:1px dashed var(--sheet-edge);margin:0;font:12px/1.5 var(--body)}
+.caderno-ui.map-ui input[type=checkbox]{width:18px;height:18px;margin:0;flex-shrink:0;accent-color:#537e87}
+.caderno-ui.map-ui .floating-panel .nested-panel,.caderno-ui.map-ui dialog details{border:0;border-top:1px dashed var(--sheet-edge);padding:8px 0;margin:0}
+.caderno-ui.map-ui .floating-panel .nested-panel>summary,.caderno-ui.map-ui dialog details>summary{min-height:40px;cursor:pointer;padding:7px 0;font:23px/1.2 var(--hand);color:var(--ink)}
+.caderno-ui.map-ui .floating-panel .nested-panel[open],.caderno-ui.map-ui dialog details[open]{display:block}
+.caderno-ui.map-ui .floating-panel .nested-panel[open]>*:not(summary),.caderno-ui.map-ui dialog details[open]>*:not(summary){margin-top:12px}
+.caderno-ui.map-ui .floating-panel form,.caderno-ui.map-ui dialog form{display:grid;gap:13px}
+.caderno-ui.map-ui .floating-panel .note,.caderno-ui.map-ui dialog .note,.caderno-ui.map-ui .caption{font:12px/1.6 var(--body);color:var(--muted);margin:0}
+.caderno-ui.map-ui .player,.caderno-ui.map-ui .waypoint-row,.caderno-ui.map-ui #biomeResults button{padding:12px;background:var(--field-paper);border:1px dashed var(--sheet-edge);border-radius:2px;min-width:0}
+.caderno-ui.map-ui .player[aria-pressed=true]{background:var(--tab-paper)}.caderno-ui.map-ui .player small{font:11px/1.5 var(--number)}
+.caderno-ui.map-ui .waypoint-name{font:22px/1.25 var(--hand);overflow-wrap:anywhere;min-width:0}.caderno-ui.map-ui .remove-waypoint{color:var(--ink)}
+.caderno-ui.map-ui .object-palette{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-height:none;overflow:visible;padding:4px}
+.caderno-ui.map-ui .object-choice{min-width:0;min-height:100px;background:var(--field-paper);color:var(--ink);gap:7px;padding:9px 5px}
+.caderno-ui.map-ui .object-choice canvas{border:0;background:#f4f0e4}.caderno-ui.map-ui .object-choice span{font:12px/1.3 var(--body)}
+.caderno-ui.map-ui .object-choice[aria-pressed=true]{background:var(--tab-paper);outline:2px dashed var(--ink);outline-offset:-5px}
+.caderno-ui.map-ui .editor-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.caderno-ui.map-ui .editor-actions button{min-width:0;font-size:22px}
+.caderno-ui.map-ui .editor-chosen{background:var(--tab-paper);font:12px/1.5 var(--number);border:1px dashed var(--sheet-edge)}
+.caderno-ui.map-ui code{background:var(--field-paper);border:1px dashed var(--sheet-edge);color:var(--ink);padding:12px;white-space:normal;font:11px/1.7 var(--number)}
+.caderno-ui.map-ui dialog{position:fixed;inset:0;margin:auto;padding:14px;border:1px solid var(--ink);border-radius:2px;background:var(--paper);color:var(--ink);box-shadow:4px 5px 0 var(--sheet-shadow)}
+.caderno-ui.map-ui #historyDialog,.caderno-ui.map-ui #exportDialog{height:min(780px,calc(100dvh - 48px));max-height:none;overflow:hidden}
+.caderno-ui.map-ui #historyDialog{width:min(820px,calc(100vw - 40px))}.caderno-ui.map-ui #exportDialog{width:min(480px,calc(100vw - 40px))}
+.caderno-ui .dialog-scroll-body{height:100%;min-height:0;overflow:auto;padding:4px 14px 12px 4px;display:flex;flex-direction:column;gap:15px;overscroll-behavior:contain}
+.caderno-ui .dialog-scroll-body>*{flex-shrink:0}.caderno-ui.map-ui dialog h2{font:34px/1.1 var(--hand);margin:0}
+.caderno-ui.map-ui dialog .row{flex-wrap:wrap;gap:10px}.caderno-ui.map-ui dialog .row.spread{justify-content:space-between;align-items:center}
+.caderno-ui.map-ui .history-changes{gap:10px}.caderno-ui.map-ui #historyDialog .history-image{max-height:40dvh;border:1px dashed var(--sheet-edge)}
+.caderno-ui.map-ui .selection-card{border:1px solid var(--ink);border-radius:2px;background:var(--paper);padding:16px;gap:10px}
+.caderno-ui.map-ui .selection-card #selectionName{font:26px/1.2 var(--hand)}
+.caderno-ui.map-ui .selection-card .numbers{font:12px/1.5 var(--number)}
+.caderno-ui :is(.panel-content,.dialog-scroll-body,.preview-settings,dialog){scrollbar-width:thin;scrollbar-color:var(--ink) var(--sheet-back)}
+.caderno-ui ::-webkit-scrollbar{width:12px;height:12px}.caderno-ui ::-webkit-scrollbar-track{background:var(--sheet-back);border-left:1px dashed var(--sheet-edge)}
+.caderno-ui ::-webkit-scrollbar-thumb{background:var(--tab-paper);border:2px solid var(--sheet-back);border-radius:2px;box-shadow:inset 0 0 0 1px var(--ink)}
+.caderno-ui .sketch-scroll-content{scrollbar-width:none!important;padding-right:22px!important}.caderno-ui .sketch-scroll-content::-webkit-scrollbar{display:none}
+.caderno-ui .sketch-scroll-rail{position:absolute;top:calc(var(--panel-heading-height,56px) + 18px);bottom:16px;right:9px;width:16px;border-left:1px dashed var(--sheet-edge);background:var(--sheet-back);touch-action:none;cursor:pointer;z-index:4}
+.caderno-ui .sketch-scroll-rail[hidden]{display:none}.caderno-ui .sketch-scroll-rail:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.caderno-ui .sketch-scroll-thumb{position:absolute;left:3px;right:2px;top:0;min-height:28px;background:var(--tab-paper);border:1px solid var(--ink);border-radius:1px;pointer-events:none}
+.caderno-ui .sketch-scroll-thumb::after{content:'≡';position:absolute;inset:0;display:grid;place-items:center;font:16px var(--hand);color:var(--ink)}
+.caderno-ui dialog>.sketch-scroll-rail{top:16px;bottom:16px;right:7px}
+@media(min-width:721px) and (max-width:1150px){.caderno-ui.map-ui[data-theme] .floating-panel[open],.caderno-ui.map-ui[data-theme] #layersPanel[open]{top:126px;bottom:204px;max-height:none}}
+@media(max-width:720px){.caderno-ui.map-ui[data-theme] .floating-panel[open],.caderno-ui.map-ui[data-theme] #layersPanel[open]{top:166px;bottom:174px;width:auto;left:12px;right:12px;max-height:none}.caderno-ui.map-ui .object-palette{grid-template-columns:repeat(3,minmax(0,1fr))}.caderno-ui.map-ui .floating-panel>summary{font-size:25px}.caderno-ui.map-ui #historyDialog,.caderno-ui.map-ui #exportDialog{height:calc(100dvh - 32px);width:calc(100vw - 24px)}}
+@media(max-height:560px){.caderno-ui.map-ui[data-theme] .floating-panel[open],.caderno-ui.map-ui[data-theme] #layersPanel[open]{top:95px;bottom:110px}.caderno-ui .preview-settings{top:52px}.caderno-ui.map-ui .chiko-corner{display:none}}
+.caderno-ui.map-ui .preview-choice-source[hidden]{display:none!important}
+.caderno-ui.map-ui .portrait-colors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.caderno-ui.map-ui .paper-color-field{display:grid;gap:7px;min-width:0;font-size:12px}
+.caderno-ui.map-ui input[type=color]{display:block;width:100%;height:44px;min-height:44px;padding:5px;background:var(--paper);border:1px solid var(--ink);border-radius:1px;cursor:pointer;box-shadow:none}
+.caderno-ui input[type=color]::-webkit-color-swatch-wrapper{padding:0}.caderno-ui input[type=color]::-webkit-color-swatch{border:1px dashed var(--sheet-edge);border-radius:0}.caderno-ui input[type=color]::-moz-color-swatch{border:1px dashed var(--sheet-edge);border-radius:0}
+.caderno-ui.map-ui .portrait-preview{display:block;width:112px;height:112px;max-width:100%;margin:8px auto;padding:7px;background:#fff;border:1px dashed var(--ink);border-radius:1px;image-rendering:pixelated}
+.caderno-ui input[type=file]{padding:7px!important;font-size:11px!important}
+.caderno-ui input[type=file]::file-selector-button{background:var(--tab-paper);color:var(--ink);border:1px solid var(--ink);border-radius:1px;padding:7px 9px;margin-right:8px;font:21px/1 var(--hand);cursor:pointer}
+.caderno-ui.map-ui input[type=range]{appearance:none;width:100%;min-width:0;height:32px;background:transparent;cursor:pointer;accent-color:var(--ink);padding:0}
+.caderno-ui input[type=range]::-webkit-slider-runnable-track{height:5px;background:var(--sheet-back);border:1px solid var(--ink);border-radius:0}
+.caderno-ui input[type=range]::-webkit-slider-thumb{appearance:none;width:16px;height:23px;background:var(--tab-paper);border:1px solid var(--ink);border-radius:1px;margin-top:-10px}
+.caderno-ui input[type=range]::-moz-range-track{height:4px;background:var(--sheet-back);border:1px solid var(--ink);border-radius:0}
+.caderno-ui input[type=range]::-moz-range-thumb{width:15px;height:22px;background:var(--tab-paper);border:1px solid var(--ink);border-radius:1px}
+.caderno-ui.map-ui input[type=checkbox]{appearance:none;display:inline-grid;place-items:center;width:20px;height:20px;flex-basis:20px;min-height:20px;background:var(--field-paper);border:1px solid var(--ink);border-radius:1px;cursor:pointer}
+.caderno-ui input[type=checkbox]:checked{background:var(--tab-paper)}.caderno-ui input[type=checkbox]:checked::after{content:'✓';font:22px/16px var(--hand);color:var(--ink)}
+.caderno-ui :is(input,select,button,[role=scrollbar]):focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.caderno-ui .history-region-fields{display:grid;gap:12px;min-width:0;margin:0;padding:15px;border:1px dashed var(--ink)}
+.caderno-ui .history-region-fields legend{font:27px/1.1 var(--hand);padding:0 7px}
+.caderno-ui.map-ui .book-tabs{bottom:12px;row-gap:7px}
+.caderno-ui.map-ui[data-theme] .book-tabs>.map-footer{position:static;grid-column:1/-1;left:auto;right:auto;bottom:auto;transform:none;display:flex;flex-wrap:wrap;width:auto;max-width:none;min-height:29px;padding:8px 4px 0;margin:0;border:0;border-top:1px dashed var(--sheet-edge);box-shadow:none!important;background:none;gap:4px 16px;font:10px/1.4 var(--number)}
+.caderno-ui.map-ui .book-tabs>.map-footer #follow{display:block}
+.caderno-ui.map-ui .chiko-corner .chiko-content .chiko-placeholder{display:none}
+.caderno-ui.map-ui .chiko-corner .chiko-content .bubble{max-width:none;width:100%}
+@media(max-width:720px){.caderno-ui.map-ui .book-tabs{bottom:8px}.caderno-ui.map-ui[data-theme] .book-tabs>.map-footer{font-size:9px;min-height:28px}.caderno-ui.map-ui .book-tabs>.map-footer #follow{display:none}}
+@media(forced-colors:active){.caderno-ui.map-ui input[type=checkbox]{appearance:auto}.caderno-ui input[type=checkbox]:checked::after{content:none}}
+/* Everyday actions first; technical controls stay available inside their folds. */
+.caderno-ui.map-ui .panel-content .quiet-options{border-top:1px dashed var(--sheet-edge);padding:6px 0}
+.caderno-ui.map-ui .panel-content .quiet-options>summary{padding:9px 2px;font:23px/1.2 var(--hand);min-height:44px}
+.caderno-ui .quiet-options .map-option-group{padding:5px 0 0;border:0}
+.caderno-ui.map-ui .new-place>summary{background:var(--tab-paper);border:1px dashed var(--ink);padding:12px!important;list-style:none;text-align:center}
+.caderno-ui .empty-page{padding:18px 12px!important;border:1px dashed var(--sheet-edge);text-align:center}
+.caderno-ui.map-ui .empty-page[hidden]{display:none}
+.caderno-ui.map-ui .workflow-sheet #editorCommon{padding:0;margin:0;border:0;display:grid;gap:10px}
+.caderno-ui.map-ui .workflow-sheet #editChosenTool{margin:0;padding:10px 12px;font-size:12px}
+.caderno-ui.map-ui .workflow-sheet .editor-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.caderno-ui.map-ui .workflow-sheet .editor-actions button{font-size:22px;min-height:44px;padding:8px 4px}
+.caderno-ui.map-ui .workflow-sheet #editSave{background:var(--tab-paper)}
+.caderno-ui.map-ui .workflow-sheet #editEnabled{accent-color:var(--ink)}
+.caderno-ui.map-ui .workflow-sheet>.note{font-size:11px;line-height:1.5}
+.caderno-ui.map-ui .workflow-sheet .object-palette{padding:5px 3px}
+.caderno-ui.map-ui .player{min-height:70px;align-items:center}
+.caderno-ui.map-ui .player[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:-4px;background:var(--tab-paper)}
+.caderno-ui.map-ui .player>span:last-of-type{font:24px/1.1 var(--hand);min-width:0;overflow-wrap:anywhere}
+.caderno-ui.map-ui .player small{margin-top:6px;font:11px/1.4 var(--number)}
+.caderno-ui.map-ui .waypoint-row{align-items:center;min-height:62px}
+.caderno-ui.map-ui .waypoint-row .waypoint-name{font-size:24px;line-height:1.2}
+.caderno-ui.map-ui #stopFollow{font-size:23px;min-height:44px}
+.caderno-ui.map-ui #preferenceStatus{font-size:11px}
+.caderno-ui.map-ui .book-tabs>.map-footer #follow{font-weight:600;color:var(--ink)}
+.caderno-ui.map-ui[data-theme] .atlas-title .world-switch-field{display:grid;gap:5px;margin:0;font:11px/1.3 var(--body);color:var(--muted);min-width:0}
+.caderno-ui.map-ui[data-theme] .atlas-title .world-switch-field .input{display:block;width:100%;min-width:0;min-height:44px;padding:6px 28px 6px 8px;font:27px/1.15 var(--hand);color:var(--ink);background:var(--paper);border:1px dashed var(--sheet-edge);border-radius:1px;box-shadow:none;cursor:pointer}
+.caderno-ui.map-ui[data-theme] .atlas-title .world-switch-field .input:disabled{cursor:default;opacity:1}
+.caderno-ui.map-ui[data-theme] .atlas-title .world-title-source{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.caderno-ui.map-ui label[hidden],.caderno-ui.map-ui #hostHint[hidden]{display:none!important}
+@media(max-width:720px){.caderno-ui.map-ui[data-theme] .atlas-title .world-switch-field .input{font-size:22px;min-height:40px;padding-left:5px}}
+/* World label and mascot read as two small notebook cards. */
+.caderno-ui.map-ui[data-theme] .atlas-title{width:270px;max-width:29vw;padding:12px 15px 13px;display:grid;gap:8px}
+.caderno-ui.map-ui .atlas-brand{width:100%;min-height:35px;padding:5px 9px;text-align:left;font:22px/1 var(--hand);background:var(--tab-paper);color:var(--ink)}
+.caderno-ui.map-ui[data-theme] .atlas-title h1{font:30px/1.12 var(--hand);max-width:none;white-space:normal;overflow-wrap:anywhere;overflow:visible;margin:0;padding:0 3px}
+.caderno-ui.map-ui .atlas-title #connection{font:11px/1.45 var(--number);color:var(--muted);margin:0;padding:7px 3px 0;border-top:1px dashed var(--sheet-edge)}
+.caderno-ui.map-ui .chiko-corner{width:285px;max-width:calc(100vw - 40px);opacity:1}
+.caderno-ui.map-ui .chiko-corner>summary{display:flex;align-items:center;gap:10px;list-style:none;padding:9px 12px;min-height:70px;cursor:pointer}
+.caderno-ui .chiko-corner>summary::-webkit-details-marker{display:none}
+.caderno-ui .chiko-summary-portrait{width:46px;height:46px;flex:0 0 46px;background:#fff;object-fit:contain;image-rendering:pixelated;border:1px dashed #b9b9b0}
+.caderno-ui .chiko-summary-copy{display:grid;gap:3px;min-width:0;flex:1}.caderno-ui .chiko-summary-copy strong{font:27px/1 var(--hand)}
+.caderno-ui .chiko-summary-copy .chiko-summary-state{font:11px/1.4 var(--number);color:var(--muted);white-space:normal}
+.caderno-ui .chiko-summary-hint{font:25px/1 var(--hand);width:22px;text-align:center}
+.caderno-ui .chiko-state-source{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.caderno-ui.map-ui .chiko-corner[open]>summary{border-bottom:1px dashed var(--sheet-edge)}
+.caderno-ui.map-ui .chiko-corner .chiko-content{padding:12px;gap:10px}.caderno-ui.map-ui .chiko-corner .bubble{margin:0;font-size:22px;max-width:none;flex:1;min-width:0;padding:9px}
+.caderno-ui.map-ui .map-scale{bottom:235px;transform:none;max-width:140px}
+@media(min-width:721px) and (max-width:1150px){.caderno-ui.map-ui .map-scale{bottom:283px}}
+@media(max-width:720px){.caderno-ui.map-ui[data-theme] .atlas-title{width:46vw;max-width:210px;padding:9px 10px;gap:6px}.caderno-ui.map-ui .atlas-brand{font-size:18px;min-height:32px}.caderno-ui.map-ui[data-theme] .atlas-title h1{font-size:24px}.caderno-ui.map-ui .atlas-title #connection{font-size:9px;padding-top:5px}.caderno-ui.map-ui .chiko-corner{width:255px;max-width:calc(100vw - 115px)}.caderno-ui.map-ui .chiko-corner>summary{gap:7px;padding:8px;min-height:64px}.caderno-ui .chiko-summary-portrait{width:38px;height:38px;flex-basis:38px}.caderno-ui .chiko-summary-copy strong{font-size:24px}.caderno-ui .chiko-summary-copy .chiko-summary-state{font-size:10px}.caderno-ui.map-ui .chiko-corner .chiko-content{flex-wrap:wrap}.caderno-ui.map-ui .chiko-corner .chiko-placeholder{display:none}}

@@ -28,7 +28,7 @@ export async function run(){
   fetch:async url=>({ok:true,status:200,json:async()=>url==='/api/state'?initial:url==='/api/worlds'?[]:{token:'test'}})};
  vm.createContext(box);
  box.window.matchMedia=query=>query==='(prefers-color-scheme: dark)'?systemThemeMedia:{matches:false,addEventListener(){}};
- for(const file of ['tile-source.js','pixel-avatars.js','map-renderer.js','chiko.js','timeline.js','map-editor.js','app.js'])vm.runInContext(await fs.readFile(new URL('../web/'+file,import.meta.url),'utf8'),box,{filename:file});
+ for(const file of ['tile-source.js','pixel-avatars.js','map-renderer.js','chiko.js','timeline.js','map-editor.js','app.js'])vm.runInContext(await fs.readFile(new URL('../src/chiko/web/'+file,import.meta.url),'utf8'),box,{filename:file});
  await new Promise(resolve=>setTimeout(resolve,10));
  vm.runInContext("openPanel('waypointsPanel');openPanel('settingsPanel')",box);
  if(nodes.get('waypointsPanel').open||!nodes.get('settingsPanel').open||nodes.get('tool-settingsPanel').getAttribute('aria-expanded')!=='true')throw Error('Single-panel workbench failed');

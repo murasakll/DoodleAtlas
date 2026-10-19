@@ -9,7 +9,7 @@ export async function run(){
   Image:class{naturalWidth=256;naturalHeight=256;set src(value){queueMicrotask(()=>this.onload?.())}},
   setTimeout:(f,ms)=>{timers.set(++nextTimer,f);return nextTimer},clearTimeout:id=>timers.delete(id),
   fetch:async(url,options)=>{requests.push({url,options});attempt++;return {status:attempt===1?503:200,ok:attempt!==1,blob:async()=>({type:'image/webp'})}}};
- vm.createContext(box);vm.runInContext(await fs.readFile(new URL('../web/tile-source.js',import.meta.url),'utf8'),box);
+ vm.createContext(box);vm.runInContext(await fs.readFile(new URL('../src/chiko/web/tile-source.js',import.meta.url),'utf8'),box);
  const state={world_id:'world',session_id:'session',terrain:{chunks:{'0':[[0,0,'chunk']]},regions:{}},live_chunks:{},tile_index:{'0/0':[[0,0,'base']],'0/1':[[0,0,'parent']]}};
  box.state=state;
  vm.runInContext("globalThis.source=new TileSource();source.update(state);globalThis.view={x:128,z:128,scale:.25,width:1024,height:768,dimension:0};globalThis.style={mode:'relief',exaggeration:1.5,intensity:.8};globalThis.tile=source.visibleTiles(view,style)[0];source.requestTile(tile)",box);

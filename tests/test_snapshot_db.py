@@ -9,8 +9,8 @@ from collections import Counter
 from pathlib import Path
 from unittest import mock
 
-import snapshot_db
-from audit_keys import census, halo_histogram
+import chiko.storage.snapshot_db as snapshot_db
+from chiko.tools.audit_keys import census, halo_histogram
 
 
 def digest(folder):

@@ -1,0 +1,29 @@
+{
+  "world": "",
+  "http_host": "0.0.0.0",
+  "http_port": 8080,
+  "minecraft_host": "127.0.0.1",
+  "minecraft_port": 8081,
+  "advertise_host": "auto",
+  "minecraft_advertise_host": "localhost",
+  "terrain_seconds": 60,
+  "player_seconds": 1,
+  "allowed_networks": [
+    "127.0.0.0/8",
+    "::1/128",
+    "10.0.0.0/8",
+    "172.16.0.0/12",
+    "192.168.0.0/16"
+  ],
+  "minecraft_allowed_networks": [
+    "127.0.0.0/8",
+    "::1/128"
+  ],
+  "pin": "",
+  "host_name": "",
+  "content_log": "auto",
+  "debug_packets": false,
+  "capture_persistent": true,
+  "capture_limit_mb": 64,
+  "resource_pack_roots": []
+}

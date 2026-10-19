@@ -7,3 +7,5 @@
 # Preserve upstream provenance/checksums, licenses, source and binaries exactly.
 third_party/** -text
 vendor/** -text
+src/chiko/assets/antique_atlas/** -text
+src/chiko/vendor/** -text

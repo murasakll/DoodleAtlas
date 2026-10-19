@@ -1,51 +1,114 @@
-# Chiko · Bedrock Real-Time Map Viewer
+<p align="center"><img src="docs/images/chiko-banner.png" alt="Chiko ao lado de um atlas de papel, com rios ciano e montanhas desenhadas" width="100%"></p>
 
-Mapa web local para Minecraft Bedrock no Windows: superfície observada, jogadores ao vivo e cartografia em pixel art. O host executa o servidor; amigos acessam pelo navegador na mesma LAN.
+# Chiko · um caderno para seus mundos Bedrock
 
-## Instalação
+Terreno observado, amigos no mapa e um atlas que você pode desenhar. Uma página local com interface de caderno, bordas rabiscadas e o Chiko acompanhando a viagem.
 
-1. Execute instalar.bat para preparar Python portátil e dependências em runtime/.
-2. Copie config.example.json para config.json. Preencha world com o caminho do seu mundo; mundos.py lista os mundos locais.
-3. Ajuste allowed_networks e lan_url para sua rede. Defina pin se desejar autenticação. HTTP e Minecraft devem usar portas distintas.
-4. Execute iniciar.bat e abra http://127.0.0.1:8080/. Encerre com parar.bat.
+**Windows · Minecraft Bedrock · navegador no PC e na LAN · em desenvolvimento**
 
-A instalação não configura Firewall ou roteador automaticamente. O servidor se destina a uma LAN de confiança; não o exponha diretamente à internet.
+[Começar](#começar-no-windows) · [Guia](docs/GUIA.md) · [Galeria](docs/GALERIA.md) · [Estrutura](docs/ESTRUTURA.md) · [Créditos](THIRD_PARTY_NOTICES.md)
 
-## Captura ao vivo
+## O que tem aqui
 
-O parser lê snapshots descartáveis do save. O terreno salvo tem prioridade sobre a captura do pack. Camas e portais são procurados também sob telhados e atualizam pela leitura periódica do save.
+| Função | Como funciona |
+| --- | --- |
+| Dois estilos de terreno | Atlas com arte do Antique Atlas ou cores naturais com relevo. |
+| Jogadores e entidades | Posições e dados acessíveis ao pack, quando o jogo envia a captura. |
+| Cartografia manual | Estradas e cercas conectáveis, carimbos, pintura do fundo e construção modular. |
+| Lugares para lembrar | Pontos pessoais no navegador ou compartilhados no mundo. |
+| Personagens | Presets, acessórios e envio manual de skin/rosto PNG. |
+| Histórico por região | Mudanças por chunk e quadros de uma região principal escolhida. |
+| Exportação | PNG da área enquadrada, com título, norte, escala e anotações opcionais. |
+| Caderno doodle | Temas claro/escuro/sistema, bordas sketch, modo foco e sons opcionais. |
 
-Para posições e capturas ao vivo, prepare o behavior pack para o mundo escolhido. Salve e feche o mundo antes de instalar/ativar o pack e mantenha sua própria cópia do save.
+O save fornece dados observados; o pack complementa o que está disponível no jogo. A prévia de seed é **opcional e experimental**, atrás do terreno real. Ela não confirma construções nem alterações de jogadores.
 
-No PowerShell, execute: runtime/python/python.exe -X utf8 prepare_pack.py "IDENTIFICADOR_DA_PASTA_DO_MUNDO="
+## Por dentro do caderno
 
-O comando produz fallback/BedrockLiveMap.mcpack sem instalá-lo. Importe-o no Minecraft, ative-o no mundo escolhido e habilite a gravação do Content Log nas opções de criador. Esse transporte não exige /connect.
+Os prints abaixo mostram **a interface executada com dados fictícios**. Não são um save real nem uma prova de desempenho. A capa é uma ilustração gerada com IA a partir da identidade do Chiko.
 
-O comando /livemap:taxa 1 64 300 configura posições a cada 1 s, até 64 leituras/tick e revisita após 300 s. PCs mais fracos devem usar valores baixos. O comando altera a sessão; reabrir o mundo pode restaurar o padrão conservador.
+| Atlas de papel | Editor cartográfico |
+| --- | --- |
+| ![Mapa no estilo Atlas](docs/images/01-atlas.png) | ![Paleta e controles de desenho](docs/images/02-editor.png) |
+| Lugares compartilhados | Cores naturais |
+| ![Lugares no mapa](docs/images/03-lugares.png) | ![Modo Minecraft com relevo](docs/images/04-minecraft.png) |
 
-## Recursos
+[Mais imagens: histórico e tema noturno](docs/GALERIA.md).
 
-- Mapa em tela cheia, painéis recolhíveis, zoom e gestos de toque.
-- Cores naturais e modo Atlas, contornos de construções observadas, camas e portais.
-- Tiles WebP sob demanda, pirâmide de zoom e cache limitado; jogadores e entidades em overlay.
-- Waypoints, desenho, carimbos, construção modular e avatares personalizáveis.
-- Temas claro/escuro/sistema, exportação da área enquadrada e histórico em baixa resolução quando habilitado.
-- Persistência por mundo em mapas/, conforme a configuração.
+## Começar no Windows
 
-A prévia opcional pela seed é **experimental**, limitada às versões/dimensões reconhecidas pelo adaptador. Prevê biomas, não construções do jogador, estruturas comprovadas ou alturas exatas. Consulte vendor/seed-generator/NOTICE.txt. O binário Windows x64 acompanha fontes e licenças; build_seed_generator.py permite reconstruí-lo.
+1. Baixe o repositório e extraia numa pasta sua.
+2. Execute **instalar.bat**. Python 3.12 e dependências ficam em **runtime/**.
+3. Execute **iniciar.bat**. Havendo vários mundos, escolha um em **config/settings.local.json** ou pela linha de comando abaixo.
+4. Abra o endereço local mostrado no terminal. Outros aparelhos usam o endereço LAN do mesmo PC.
+5. Para jogadores ao vivo, importe **dist/Chiko-Universal.mcpack**, ative no mundo e faça o vínculo em **Ajustes → Leitura e captura do jogo**.
+
+O pack é gerado pelo instalador. Salve e saia do mundo antes de instalar ou atualizar um pack. Encerre o aplicativo com **parar.bat**.
+
+~~~powershell
+# Ver os mundos encontrados
+.\runtime\python\python.exe -m chiko worlds
+
+# Escolher um mundo
+.\runtime\python\python.exe -m chiko serve --world "worlds/MeuMundo"
+
+# Gerar novamente o addon universal
+.\runtime\python\python.exe -m chiko pack
+~~~
+
+O pack atual declara engine mínima **1.26.50** e Script API **2.9.0**. Isso não garante versões futuras. [Instalação, vínculo, rede e solução de problemas](docs/GUIA.md).
+
+### Já usa Python?
+
+Use **Python 3.12** em um ambiente virtual:
+
+~~~powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e .
+python -m chiko init
+python -m chiko pack
+python -m chiko serve --world "worlds/MeuMundo"
+~~~
+
+O caminho é seu; o projeto não vem com o save de ninguém. O suporte empacotado e o gerador nativo opcional são voltados a Windows x64.
+
+## Limites atuais
+
+- Um IP remoto não dá acesso ao save ou ao log de outro servidor. Não há integração automática com qualquer servidor público ou Realm.
+- O pack não lê terreno arbitrário descarregado. A seed não confirma estruturas ou alturas exatas.
+- O histórico não reconstrói um passado que não foi registrado. Sua região principal tem limite de **4.096 chunks**, quadros pequenos e cota de armazenamento.
+- Não existe screenshot gigante periódico do mundo inteiro. Exportações grandes são solicitadas pelo usuário.
+- Sons só começam após ativação manual. Sono e subterrâneo do Chiko ainda não são eventos reais integrados.
+- Nenhum ganho de FPS é prometido sem medição equivalente. As animações podem ser pausadas.
+
+## Seus dados ficam no seu PC
+
+Configurações locais, **data/**, **mapas/**, **logs/**, mundos, capturas e tokens ficam fora do Git. Use o PIN para visitantes da LAN; ações administrativas continuam restritas ao host.
+
+O parser lê snapshots descartáveis, não o LevelDB original. Uma cópia de mundo aberto ainda pode exigir novas tentativas. Bancos SQLite com WAL precisam de backup consistente: veja [dados e backup](docs/GUIA.md#dados-e-backup).
 
 ## Desenvolvimento
 
-server.py serve API/site; terrain.py lê snapshots; tile_pipeline.py gera tiles; web/ contém interface/editores; fallback/behavior_pack/ contém o pack. A paleta é editável em paleta.json.
+O código mora em **src/chiko/**, separado em rede, leitura do mundo, armazenamento, cartografia e interface. Veja a [árvore e o fluxo](docs/ESTRUTURA.md).
 
-Após preparar config.json, uma verificação direcionada é: runtime/python/python.exe -X utf8 -m unittest discover -s tests -p test_observed_points.py -v
+~~~powershell
+python -m unittest discover -s tests -v
+node tests/web_smoke.mjs
+node tests/map_editor.mjs
+node tests/map_buildings.mjs
+node tests/pixel_avatars.mjs
+node tests/tile_source.mjs
+node tests/universal_pack.mjs
+~~~
 
-O comando node tests/web_smoke.mjs requer Node instalado separadamente e usa DOM/canvas simulados. Não comprova funcionamento real no jogo ou no celular.
-
-Configurações pessoais, runtime/, data/, mapas/, logs, relatórios locais e mundos exportados ficam fora do Git. Para copiar bancos SQLite abertos, use a API SQLite de backup; copiar apenas .sqlite pode ignorar dados no WAL.
+Os testes usam dados temporários e simulações. Não substituem Minecraft, celular ou uma sessão longa. [Como contribuir ou relatar um problema](docs/CONTRIBUINDO.md).
 
 ## Créditos e licenças
 
-Arte do Atlas: **Antique Atlas / Hunternif**, adaptada para tinta e papel, sob **CC BY-NC-SA 3.0**: atribuição, uso não comercial e compartilhamento das adaptações da arte sob a mesma licença. Exportações desse modo incluem créditos. Não há afiliação ou endosso dos autores originais.
+- **Arte do atlas:** [Antique Atlas / Hunternif](https://github.com/AntiqueAtlasTeam/AntiqueAtlas), **CC BY-NC-SA 3.0**. As adaptações da arte mantêm atribuição e termos não comerciais.
+- **Personagem Chiko:** [Hachiko / Noah](https://www.tiktok.com/@hachikookami). A pixel art e a capa foram geradas com IA a partir da referência; não são apresentadas como desenhos feitos pelo criador.
 
-Consulte [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), [o manifesto da arte](third_party/antique_atlas/manifest.json), as licenças MIT em vendor/seed-generator/ e a licença OFL em web/assets/. Essas licenças possuem escopos distintos e não constituem uma licença única de todo o código do projeto.
+Fontes, gerador de seed e dependências têm licenças próprias. O código autoral ainda não tem licença geral de reutilização definida; publicar no GitHub não relicencia material de terceiros. [Avisos completos](THIRD_PARTY_NOTICES.md).
+
+Projeto independente, sem afiliação ou endosso da Mojang, Microsoft ou Antique Atlas.

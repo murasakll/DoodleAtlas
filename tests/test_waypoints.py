@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from aiohttp import CookieJar
 from aiohttp.test_utils import TestClient, TestServer
-from waypoints import WaypointStore, WaypointLimit
+from chiko.storage.waypoints import WaypointStore, WaypointLimit
 
 
 class Waypoints(unittest.TestCase):
@@ -44,12 +44,12 @@ class Waypoints(unittest.TestCase):
 
 class WaypointAPI(unittest.IsolatedAsyncioTestCase):
     async def test_auth_world_guard_sse_and_restart(self):
-        import server
-        config=json.loads((server.ROOT/'config.json').read_text(encoding='utf-8-sig'))
+        import chiko.server as server
+        config=json.loads((Path(__file__).resolve().parents[1]/'config'/'settings.example.json').read_text(encoding='utf-8-sig'))
         with tempfile.TemporaryDirectory(prefix='chiko-waypoints-') as directory:
             root=Path(directory);world=root/'world';world.mkdir();(world/'levelname.txt').write_text('Test')
             config.update(world=str(world),capture_persistent=True,pin='123456',allowed_networks=['127.0.0.0/8'])
-            with patch('server.ROOT',root):
+            with patch('chiko.server.ROOT',root):
                 live=server.LiveMap(config.copy())
                 first=TestClient(TestServer(live.app()),cookie_jar=CookieJar(unsafe=True))
                 second=TestClient(TestServer(live.app()),cookie_jar=CookieJar(unsafe=True))

@@ -9,9 +9,9 @@ from unittest.mock import patch
 
 import numpy as np
 from PIL import Image
-from surface_store import SurfaceStore
-from render_queue import RenderQueue,Rendered
-from tile_pipeline import TileIndex,TileCache,TilePipeline,TileChanged,render_base,MAX_LEVEL,TILE_SIZES,source_key
+from chiko.storage.surface_store import SurfaceStore
+from chiko.cartography.render_queue import RenderQueue,Rendered
+from chiko.cartography.tile_pipeline import TileIndex,TileCache,TilePipeline,TileChanged,render_base,MAX_LEVEL,TILE_SIZES,source_key
 
 
 class IndexTests(unittest.TestCase):
@@ -146,7 +146,7 @@ class PipelineTests(unittest.IsolatedAsyncioTestCase):
         self.put(self.live,0,0,'minecraft:water');self.sync()
         started=threading.Event();gate=threading.Event()
         def slow(*args):started.set();gate.wait(2);return render_base(*args)
-        with patch('tile_pipeline.render_base',side_effect=slow):
+        with patch('chiko.cartography.tile_pipeline.render_base',side_effect=slow):
             pending=asyncio.create_task(self.pipeline.request(0,0,0,0))
             try:
                 for _ in range(100):
@@ -163,7 +163,7 @@ class PipelineTests(unittest.IsolatedAsyncioTestCase):
         self.put(self.live,0,0,'minecraft:water');self.sync()
         started=threading.Event();gate=threading.Event()
         def slow(*args):started.set();gate.wait(2);return render_base(*args)
-        with patch('tile_pipeline.render_base',side_effect=slow):
+        with patch('chiko.cartography.tile_pipeline.render_base',side_effect=slow):
             pending=asyncio.create_task(self.pipeline.request(0,1,0,0))
             closing=None
             try:

@@ -6,5 +6,6 @@ if not exist runtime\python\python.exe (
   exit /b 1
 )
 set PYTHONUTF8=1
-runtime\python\python.exe -X utf8 server.py
+set "PYTHONPATH=%~dp0src"
+runtime\python\python.exe -X utf8 -m chiko serve
 pause

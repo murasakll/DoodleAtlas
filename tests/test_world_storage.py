@@ -9,9 +9,9 @@ from unittest.mock import patch
 from contextlib import closing
 
 import numpy as np
-from surface_store import SurfaceStore,SurfaceQuotaExceeded
-from world_storage import WorldStorage,world_id,copy_verified
-from session_cache import SessionCache,preserve_legacy,LEGACY
+from chiko.storage.surface_store import SurfaceStore,SurfaceQuotaExceeded
+from chiko.storage.world_storage import WorldStorage,world_id,copy_verified
+from chiko.storage.session_cache import SessionCache,preserve_legacy,LEGACY
 
 class StorageTests(unittest.TestCase):
     def setUp(self):
@@ -76,12 +76,12 @@ class StorageTests(unittest.TestCase):
 
 class PersistentAppTests(unittest.IsolatedAsyncioTestCase):
     async def test_restart_survives_session_cleanup_and_rollback_keeps_new_data(self):
-        import server
-        config=json.loads((server.ROOT/'config.json').read_text(encoding='utf-8-sig'))
+        import chiko.server as server
+        config=json.loads((Path(__file__).resolve().parents[1]/'config'/'settings.example.json').read_text(encoding='utf-8-sig'))
         with tempfile.TemporaryDirectory(prefix='chiko-app-storage-') as directory:
             root=Path(directory);world=root/'world';world.mkdir();(world/'levelname.txt').write_text('Persistent test')
             config.update(world=str(world),capture_persistent=True)
-            with patch('server.ROOT',root):
+            with patch('chiko.server.ROOT',root):
                 first=server.LiveMap(config.copy())
                 first.accept_surface({'surfaceVersion':2,'dimension':0,'x':0,'z':0,'palette':['minecraft:water'],'ids':[0]*256,'heights':[62]*256})
                 first.terrain.store.put(0,1,0,np.full((16,16),'minecraft:stone'),np.full((16,16),70))

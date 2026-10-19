@@ -3,7 +3,7 @@ import threading
 import time
 import unittest
 
-from render_queue import RenderQueue,RenderBusy
+from chiko.cartography.render_queue import RenderQueue,RenderBusy
 
 
 class QueueTests(unittest.IsolatedAsyncioTestCase):

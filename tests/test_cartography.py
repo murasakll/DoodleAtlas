@@ -7,10 +7,10 @@ import time
 from unittest.mock import patch
 import numpy as np
 from PIL import Image
-from cartography import draw_atlas,PAPER,INK,FAINT
-from surface_store import SurfaceStore
-from tile_pipeline import render_base
-from antique_art import render_observed,sheets,quarter_uv,ASSETS
+from chiko.cartography.atlas import draw_atlas,PAPER,INK,FAINT
+from chiko.storage.surface_store import SurfaceStore
+from chiko.cartography.tile_pipeline import render_base
+from chiko.cartography.antique_art import render_observed,sheets,quarter_uv,ASSETS
 
 
 def assert_ink_palette(test,pixels):
@@ -92,20 +92,20 @@ class CartographyTests(unittest.TestCase):
 
     def test_forest_biome_does_not_invent_trees_on_cleared_land(self):
         names=np.full((288,288),'minecraft:grass_block',dtype=object);heights=np.full(names.shape,64)
-        with patch('antique_art._compose',return_value='captured') as compose:
+        with patch('chiko.cartography.antique_art._compose',return_value='captured') as compose:
             render_observed(names,heights,biomes=np.full(names.shape,'forest',dtype=object))
         self.assertEqual({'plains'},set(compose.call_args.args[0].flat))
 
 
 class AtlasHTTP(unittest.IsolatedAsyncioTestCase):
     async def test_atlas_route_and_etag(self):
-        import server
+        import chiko.server as server
         from aiohttp.test_utils import TestClient,TestServer
-        config=json.loads((server.ROOT/'config.json').read_text(encoding='utf-8-sig'))
+        config=json.loads((Path(__file__).resolve().parents[1]/'config'/'settings.example.json').read_text(encoding='utf-8-sig'))
         with tempfile.TemporaryDirectory(prefix='chiko-atlas-http-') as directory:
             root=Path(directory);world=root/'world';world.mkdir();(world/'levelname.txt').write_text('Atlas test')
             config.update(world=str(world),capture_persistent=False,pin='',allowed_networks=['127.0.0.0/8'])
-            with patch('server.ROOT',root):
+            with patch('chiko.server.ROOT',root):
                 live=server.LiveMap(config);client=TestClient(TestServer(live.app()));await client.start_server()
                 try:
                     live.terrain.store.put(0,0,0,np.full((16,16),'minecraft:water'),np.full((16,16),62))

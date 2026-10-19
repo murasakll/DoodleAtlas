@@ -1,0 +1,26 @@
+name: Problema no caderno
+description: Conte o que aconteceu e como repetir.
+title: '[Bug] '
+body:
+  - type: markdown
+    attributes:
+      value: Não envie PIN, tokens, saves ou logs pessoais completos.
+  - type: input
+    id: versions
+    attributes:
+      label: Versões
+      description: Minecraft, Windows e navegador.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Como reproduzir
+      description: Passos e resultado esperado/observado. Diga se usou jogo real ou demonstração.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Imagem ou erro
+      description: Remova dados pessoais antes de anexar.

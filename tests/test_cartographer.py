@@ -1,6 +1,6 @@
 import unittest
 
-from terrain import colour, palette_colour, PALETTE
+from chiko.world.terrain import colour, palette_colour, PALETTE
 
 
 class Cartographer(unittest.TestCase):

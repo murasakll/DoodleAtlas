@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-from map_annotations import AnnotationStore,AnnotationConflict,validate
+from chiko.storage.annotations import AnnotationStore,AnnotationConflict,validate
 
 CELL=dict(kind='road',dimension=0,grid=4,x=-4,z=8,color='#484238',label='Estrada norte')
 BUILDING=dict(id='hall',name='Hall',dimension=0,grid=4,display='detailed',icon='house',color='#484238')
@@ -51,7 +51,7 @@ class AnnotationTests(unittest.TestCase):
             self.assertEqual([],AnnotationStore(Path(directory)/'b/anotacoes.sqlite').read()['cells'])
 
     def test_village_stamps_round_trip_and_layer(self):
-        from map_annotations import STAMP_KINDS
+        from chiko.storage.annotations import STAMP_KINDS
         cells=[CELL|{'kind':kind,'x':n*16} for n,kind in enumerate(sorted(STAMP_KINDS))]
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/'anotacoes.sqlite'
@@ -78,13 +78,13 @@ class AnnotationTests(unittest.TestCase):
 
 class AnnotationHTTP(unittest.IsolatedAsyncioTestCase):
     async def test_permissions_large_document_and_stale_world(self):
-        import server
+        import chiko.server as server
         from aiohttp.test_utils import TestClient,TestServer
-        config=json.loads((server.ROOT/'config.json').read_text(encoding='utf-8-sig'))
+        config=json.loads((Path(__file__).resolve().parents[1]/'config'/'settings.example.json').read_text(encoding='utf-8-sig'))
         with tempfile.TemporaryDirectory(prefix='chiko-editor-') as directory:
             root=Path(directory);world=root/'world';world.mkdir();(world/'levelname.txt').write_text('Editor test')
             config.update(world=str(world),capture_persistent=True,pin='',allowed_networks=['127.0.0.0/8'])
-            with patch('server.ROOT',root):
+            with patch('chiko.server.ROOT',root):
                 live=server.LiveMap(config);client=TestClient(TestServer(live.app()));await client.start_server()
                 try:
                     body={'world_id':live.world_id(),'revision':0,'cells':[CELL|{'x':n*4} for n in range(100)]};headers={'X-Host-Token':live.host_token}

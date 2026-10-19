@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image
 from aiohttp import CookieJar
 from aiohttp.test_utils import TestClient,TestServer
-from seed_layer import SeedGenerator,seed_number,canonical,render_prediction,NATIVE,metadata
+from chiko.cartography.seed_layer import SeedGenerator,seed_number,canonical,render_prediction,NATIVE,metadata
 
 class SeedTests(unittest.TestCase):
     def test_atlas_uses_halo_and_keeps_pixel_art_without_smoothing(self):
@@ -24,21 +24,21 @@ class SeedTests(unittest.TestCase):
                 calls.append((scale,x,z,side))
                 return np.tile((np.arange(x,x+side)>=0).astype(np.int32),(side,1))
             def name(self,n):return 'forest' if n else 'ocean'
-        with patch('seed_layer.SeedGenerator',Field):
+        with patch('chiko.cartography.seed_layer.SeedGenerator',Field):
             a=Image.open(io.BytesIO(render_prediction('1',0,-1,0,style='atlas',smooth=False))).convert('RGBA')
             b=Image.open(io.BytesIO(render_prediction('1',0,-1,0,style='atlas',smooth=True))).convert('RGBA')
         self.assertEqual((4,-68,-4,72),calls[0]);self.assertEqual((256,256),a.size)
         np.testing.assert_array_equal(a,b)
 
     def test_soft_prediction_interpolates_across_tile_boundary_with_shared_halo(self):
-        from seed_layer import seed_palette
+        from chiko.cartography.seed_layer import seed_palette
         class Field:
             def __init__(self,*args):pass
             def __enter__(self):return self
             def __exit__(self,*args):pass
             def grid(self,scale,x,y,z,side=64):return np.tile((np.arange(x,x+side)>=64).astype(np.int32),(side,1))
             def name(self,n):return 'plains' if n else 'ocean'
-        with patch('seed_layer.SeedGenerator',Field):
+        with patch('chiko.cartography.seed_layer.SeedGenerator',Field):
             left=Image.open(io.BytesIO(render_prediction('1',0,0,0,smooth=True))).convert('RGB')
             right=Image.open(io.BytesIO(render_prediction('1',0,1,0,smooth=True))).convert('RGB')
             raw=Image.open(io.BytesIO(render_prediction('1',0,0,0,smooth=False))).convert('RGB')
@@ -75,14 +75,14 @@ class SeedTests(unittest.TestCase):
 
 class SeedHTTP(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
-        from server import LiveMap,ROOT
-        from session_cache import SessionCache
+        from chiko.server import LiveMap,ROOT
+        from chiko.storage.session_cache import SessionCache
         self.scratch=tempfile.TemporaryDirectory(prefix='chiko-seed-http-');root=Path(self.scratch.name)
         world=root/'world';world.mkdir();(world/'levelname.txt').write_text('Seed HTTP test',encoding='utf-8')
-        config=json.loads((ROOT/'config.json').read_text(encoding='utf-8-sig'))
+        config=json.loads((Path(__file__).resolve().parents[1]/'config'/'settings.example.json').read_text(encoding='utf-8-sig'))
         config.update(world=str(world),pin='2468',capture_persistent=False)
-        self.root_patch=patch('server.ROOT',root);self.root_patch.start()
-        with patch('server.SessionCache',side_effect=lambda parent:SessionCache(root/'sessions')):self.live=LiveMap(config)
+        self.root_patch=patch('chiko.server.ROOT',root);self.root_patch.start()
+        with patch('chiko.server.SessionCache',side_effect=lambda parent:SessionCache(root/'sessions')):self.live=LiveMap(config)
         self.live.seed_info={'available':True,'experimental':True,'seed':'1234','revision':'test-revision'}
         self.client=TestClient(TestServer(self.live.app()),cookie_jar=CookieJar(unsafe=True));await self.client.start_server()
 
@@ -108,7 +108,7 @@ class SeedHTTP(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(400,(await self.client.get(path+'&smooth=invalid')).status)
         calls=[]
         def render(*args):calls.append(args);return b'simulated-webp'
-        with patch('server.render_prediction',side_effect=render):
+        with patch('chiko.server.render_prediction',side_effect=render):
             first=await self.client.get(path);self.assertEqual(200,first.status);await first.read()
             self.assertEqual(1,len(calls));self.assertEqual('image/webp',first.content_type)
             second=await self.client.get(path,headers={'If-None-Match':first.headers['ETag']})

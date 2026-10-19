@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace
 import numpy as np
-from observed_points import ObservedPoints,extract_points,point_kind,DETECTOR_VERSION
+from chiko.storage.observed_points import ObservedPoints,extract_points,point_kind,DETECTOR_VERSION
 
 
 class ObservedPointTests(unittest.TestCase):

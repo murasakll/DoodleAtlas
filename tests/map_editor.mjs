@@ -6,7 +6,7 @@ export async function run(){
  for(const[id,value]of Object.entries({editTool:'road',editGrid:'4',editBrush:'1',editColor:'#484238',editLabel:'North'}))element(id).value=value;
  const tasks=[];let saves=0,conflict=false;
  const listeners={};const box={document:{getElementById:element,createElement:()=>({dataset:{},children:[],append(...items){this.children.push(...items)},setAttribute(k,v){this[k]=v}}),addEventListener:(event,fn)=>{listeners[event]=fn}},window:{addEventListener(){}},setTimeout:f=>{tasks.push(f);return 1},clearTimeout(){},fetch:async(url,options)=>{if(!options)return {ok:true,json:async()=>({world_id:'one',available:true,revision:0,cells:[]})};saves++;return conflict?{ok:false,text:async()=> 'Conflito'}:{ok:true,json:async()=>({revision:saves})}}};vm.createContext(box);
- vm.runInContext(await fs.readFile(new URL('../web/map-editor.js',import.meta.url),'utf8'),box);
+ vm.runInContext(await fs.readFile(new URL('../src/chiko/web/map-editor.js',import.meta.url),'utf8'),box);
  vm.runInContext("globalThis.region=new CartographyModel();for(let z=0;z<3;z++)for(let x=0;x<3;x++)if(x!==1||z!==1)region.set({kind:'territory',dimension:0,grid:4,x:x*4,z:z*4,color:'#484238',label:'Realm'});globalThis.contours=atlasTerritoryContours([...region.cells.values()],region)",box);
  if(vm.runInContext('contours.length!==1||contours[0].paths.length!==2||contours[0].paths.some(p=>!p.closed)||contours[0].edges.length!==16',box))throw Error('Territory contours contain internal seams or lost their hole');
  vm.runInContext("globalThis.diagonal=new CartographyModel([{kind:'territory',dimension:0,grid:4,x:0,z:0,color:'#484238',label:'Realm'},{kind:'territory',dimension:0,grid:4,x:4,z:4,color:'#484238',label:'Realm'}]);globalThis.diagonalPaths=atlasTerritoryContours([...diagonal.cells.values()],diagonal)[0].paths",box);
@@ -64,7 +64,7 @@ export async function run(){
  // Every new stamp must paint ink, place once, occupy its full footprint,
  // and erase/undo correctly, including the 3-cell symbols at grid 16.
  const village=['well','fountain','watchtower','windmill','barn','stable','bridge','square','garden','forge','bakery','tavern','market','lamp','campfire','townhall','library','warehouse','castle','mine','dock','boat','wagon','tent','bench','tree','pine','flowers','boulder','banner'];
- const html=await fs.readFile(new URL('../web/index.html',import.meta.url),'utf8');
+ const html=await fs.readFile(new URL('../src/chiko/web/index.html',import.meta.url),'utf8');
  for(const kind of village){
   if(!html.includes('value="'+kind+'"'))throw Error('Village stamp absent from menu: '+kind);
   box.villageKind=kind;

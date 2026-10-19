@@ -12,8 +12,8 @@ import zlib
 from aiohttp.test_utils import TestClient,TestServer
 import numpy as np
 from PIL import Image
-from map_history import MapHistory,render_overview
-from surface_store import SurfaceStore
+from chiko.storage.history import MapHistory,render_overview,validate_region
+from chiko.storage.surface_store import SurfaceStore
 
 
 def row(name='minecraft:water'):
@@ -21,6 +21,32 @@ def row(name='minecraft:water'):
 
 
 class HistoryTests(unittest.TestCase):
+    def test_primary_region_validation_and_persistence(self):
+        region={'dimension':0,'min_x':-16,'min_z':0,'max_x':32,'max_z':32}
+        with tempfile.TemporaryDirectory() as directory:
+            history=MapHistory(Path(directory)/'history.sqlite')
+            history.configure({'primary_region':region})
+            self.assertEqual(region,MapHistory(history.path).settings()['primary_region'])
+            for invalid in [region|{'min_x':-15},region|{'max_x':-16},region|{'dimension':3},region|{'max_x':160000},region|{'min_x':False},region|{'extra':1}]:
+                with self.assertRaises(ValueError):validate_region(invalid)
+            history.configure({'primary_region':None})
+            self.assertIsNone(history.settings()['primary_region'])
+
+    def test_region_overview_reads_only_selected_chunks_and_keeps_extent(self):
+        region={'dimension':0,'min_x':0,'min_z':0,'max_x':32,'max_z':16}
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);saved=SurfaceStore(root/'saved.sqlite');live=SurfaceStore(root/'live.sqlite')
+            saved.put(0,0,0,np.full((16,16),'minecraft:water'),np.full((16,16),62))
+            saved.put(0,100000,100000,np.full((16,16),'minecraft:stone'),np.full((16,16),62))
+            live.put(0,-100000,-100000,np.full((16,16),'minecraft:sand'),np.full((16,16),62),surface_version=2)
+            data,meta=render_overview(saved.path,live.path,0,threading.Event(),region=region)
+            self.assertEqual(1,meta['chunks_read']);self.assertEqual(32,meta['max_x'])
+            with Image.open(io.BytesIO(data)) as image:
+                self.assertEqual((32,16),image.size)
+                self.assertEqual(255,image.convert('RGBA').getpixel((8,8))[3])
+                self.assertEqual(0,image.convert('RGBA').getpixel((24,8))[3])
+            with self.assertRaises(ValueError):render_overview(saved.path,live.path,1,threading.Event(),region=region)
+
     def test_content_dedup_revert_and_retention(self):
         with tempfile.TemporaryDirectory() as directory:
             history=MapHistory(Path(directory)/'history.sqlite')
@@ -72,19 +98,19 @@ class HistoryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             store=SurfaceStore(Path(directory)/'superficie.sqlite',preserve=True)
             with patch.object(store.history,'record',side_effect=sqlite3.OperationalError('disk full')):
-                with self.assertLogs('surface_store',level='WARNING'):
+                with self.assertLogs('chiko.storage.surface_store',level='WARNING'):
                     store.put(0,0,0,np.full((16,16),'minecraft:water'),np.full((16,16),62))
             self.assertEqual('minecraft:water',store.get(0,0,0)[0][0,0])
 
 
 class HistoryAPI(unittest.IsolatedAsyncioTestCase):
     async def test_capture_permissions_world_and_image(self):
-        import server
-        config=json.loads((server.ROOT/'config.json').read_text(encoding='utf-8-sig'))
+        import chiko.server as server
+        config=json.loads((Path(__file__).resolve().parents[1]/'config'/'settings.example.json').read_text(encoding='utf-8-sig'))
         with tempfile.TemporaryDirectory(prefix='chiko-history-') as directory:
             root=Path(directory);world=root/'world';world.mkdir();(world/'levelname.txt').write_text('Test')
             config.update(world=str(world),capture_persistent=True,pin='',allowed_networks=['127.0.0.0/8'])
-            with patch('server.ROOT',root):
+            with patch('chiko.server.ROOT',root):
                 live=server.LiveMap(config);client=TestClient(TestServer(live.app()));await client.start_server()
                 try:
                     live.terrain.store.put(0,0,0,np.full((16,16),'minecraft:water'),np.full((16,16),62))
@@ -93,6 +119,9 @@ class HistoryAPI(unittest.IsolatedAsyncioTestCase):
                     world_id=live.world_id();headers={'X-Host-Token':live.host_token};body={'world_id':world_id,'dimension':0}
                     self.assertEqual(403,(await client.post('/api/history/capture',json=body)).status)
                     self.assertEqual(409,(await client.post('/api/history/capture',json=body|{'world_id':'old'},headers=headers)).status)
+                    self.assertEqual(409,(await client.post('/api/history/capture',json=body,headers=headers)).status)
+                    region={'dimension':0,'min_x':0,'min_z':0,'max_x':16,'max_z':16}
+                    self.assertEqual(200,(await client.post('/api/history/settings',json={'world_id':world_id,'settings':{'primary_region':region}},headers=headers)).status)
                     self.assertEqual(202,(await client.post('/api/history/capture',json=body,headers=headers)).status)
                     await asyncio.wait_for(live.history_job['task'],5)
                     data=await (await client.get('/api/history')).json();self.assertEqual(1,len(data['frames']))

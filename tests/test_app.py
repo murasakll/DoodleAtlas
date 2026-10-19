@@ -2,16 +2,22 @@
 import asyncio
 import json
 import unittest
+import tempfile
+from unittest.mock import patch
 from pathlib import Path
 from aiohttp import ClientSession, CookieJar, web
 from aiohttp.test_utils import TestClient, TestServer
-from server import LiveMap, ROOT, parse_targets
-from terrain import chunk_image, snapshot
+from chiko.server import LiveMap, ROOT, parse_targets
+from chiko.world.terrain import chunk_image, snapshot
 
 
 class Integration(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
-        self.config = json.loads((ROOT / 'config.json').read_text(encoding='utf-8-sig'))
+        self.config = json.loads((Path(__file__).resolve().parents[1] / 'config' / 'settings.example.json').read_text(encoding='utf-8-sig'))
+        self.scratch=tempfile.TemporaryDirectory(prefix='chiko-http-test-');root=Path(self.scratch.name)
+        world=root/'world';world.mkdir();(world/'levelname.txt').write_text('HTTP fixture')
+        self.config['world']=str(world)
+        self.root_patch=patch('chiko.server.ROOT',root);self.root_patch.start()
         self.config['pin'] = '2468'
         self.config['capture_persistent'] = False
         self.config['packet_log'] = 'minecraft-simulated.jsonl'
@@ -22,6 +28,7 @@ class Integration(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self):
         await self.client.close()
         self.live.close()
+        self.root_patch.stop();self.scratch.cleanup()
 
     async def test_pin_and_readonly(self):
         self.assertEqual(200, (await self.client.get('/')).status)
@@ -223,7 +230,7 @@ class Integration(unittest.IsolatedAsyncioTestCase):
 
 class Parser(unittest.TestCase):
     def test_coverage_detects_blocks_missing_from_library_index(self):
-        from coverage import audit_records,chunk_record
+        from chiko.world.coverage import audit_records,chunk_record
         import struct
         records={(0,1,2):{44,47},(0,3,4):{47},(0,8,9):{49}}
         result=audit_records(records,{(0,1,2)})
@@ -235,8 +242,8 @@ class Parser(unittest.TestCase):
 
     def test_content_log_no_replay_partial_lines_and_rotation(self):
         import tempfile
-        from content_log import ContentLog
-        with tempfile.TemporaryDirectory(dir=ROOT/'data') as directory:
+        from chiko.network.content_log import ContentLog
+        with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)/'test.log'
             path.write_text('[BEDROCK_LIVE_MAP]{"players":[{"old":true}]}\n',encoding='utf-8')
             reader = ContentLog(path)
@@ -253,7 +260,7 @@ class Parser(unittest.TestCase):
     def test_encryption_ecdh_and_continuous_stream(self):
         import base64
         import hashlib
-        from encryption import GameEncryption
+        from chiko.network.encryption import GameEncryption
         from cryptography.hazmat.primitives import serialization
         from cryptography.hazmat.primitives.asymmetric import ec
         from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
@@ -273,7 +280,7 @@ class Parser(unittest.TestCase):
     def test_top_column_negative_height_and_image_axes(self):
         from amulet.api.chunk import Chunk
         from amulet.api.block import Block
-        from terrain import colour
+        from chiko.world.terrain import colour
         import numpy as np
         chunk = Chunk(-1, 3)
         air = chunk.block_palette.get_add_block(Block('minecraft','air'))

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Chiko · Caderno de componentes</title><link rel="stylesheet" href="/chiko-design.css"><script src="/components.js" defer></script></head>
+<body class="chiko-ui">
+<a class="skip" href="#components">Pular para os componentes</a>
+<div class="sheet">
+ <header class="topbar">
+  <a class="wordmark" href="/components.html" aria-label="Chiko, caderno de componentes"><svg viewBox="0 0 40 42" aria-hidden="true"><path d="M5 3L32 5 35 37 8 39Z" fill="#a8e6f5" stroke="#111" stroke-width="2.5"/><path d="M11 12L27 13M12 20L28 20M13 28L23 29" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/></svg>Chiko<span class="caption">/ atlas</span></a>
+  <nav class="top-links" aria-label="Navegação da demonstração"><a class="optional" href="#components">Componentes</a><a href="/">Voltar ao mapa ↗</a></nav>
+ </header>
+ <main id="components">
+  <section class="hero" aria-labelledby="page-title">
+   <div><div class="eyebrow">Caderno de campo / 01</div><h1>Um mundo,<br>página por página.</h1><p>Papel, tinta e um pouco de aventura. Uma coleção de peças para o seu mapa, com espaço para o Chiko cuidar das descobertas.</p></div>
+   <div class="hero-note">Só uma amostra!<br>Os dados aqui são de exemplo.</div>
+  </section>
+  <div class="section-heading"><h2>As peças do caderno</h2><span class="caption">Branco papel · ciano · laranja · tinta preta</span></div>
+  <div class="grid">
+   <section class="panel" aria-labelledby="actions-title">
+    <div class="panel-heading"><span class="index">01</span><h3 id="actions-title">Uma ação de cada vez</h3></div>
+    <div class="row"><button class="button button--primary" id="discover">Marcar descoberta <span aria-hidden="true">↗</span></button><button class="button button--cyan" id="layer-toggle" aria-pressed="true">Camada real</button><button class="button" disabled>Exportar depois</button></div>
+    <p class="demo-status" id="action-status" role="status">Experimente os botões. Nenhum dado do mundo será alterado.</p>
+    <div class="notice">No mapa final, um único mapa ocupará toda a janela. Os painéis flutuam por cima e podem ser recolhidos.</div>
+   </section>
+   <section class="panel" aria-labelledby="dimensions-title">
+    <div class="panel-heading"><span class="index">02</span><h3 id="dimensions-title">Abas de fichário</h3></div>
+    <div class="tabs" role="tablist" aria-label="Dimensão de exemplo">
+     <button class="tab" id="tab-overworld" role="tab" aria-selected="true" aria-controls="dimension-overworld" tabindex="0">Overworld</button>
+     <button class="tab" id="tab-nether" role="tab" aria-selected="false" aria-controls="dimension-nether" tabindex="-1">Nether</button>
+     <button class="tab" id="tab-end" role="tab" aria-selected="false" aria-controls="dimension-end" tabindex="-1">End</button>
+    </div>
+    <div class="tab-content" id="dimension-overworld" role="tabpanel" aria-labelledby="tab-overworld" tabindex="0"><p>Primeira página: florestas, água e caminhos para descobrir.</p></div>
+    <div class="tab-content" id="dimension-nether" role="tabpanel" aria-labelledby="tab-nether" tabindex="0" hidden><p>Uma ficha separada para as suas viagens pelo Nether.</p></div>
+    <div class="tab-content" id="dimension-end" role="tabpanel" aria-labelledby="tab-end" tabindex="0" hidden><p>As ilhas do End têm seu próprio lugar no caderno.</p></div>
+   </section>
+   <section class="panel" aria-labelledby="players-title">
+    <div class="panel-heading"><span class="index">03</span><h3 id="players-title">Quem está explorando?</h3></div>
+    <div class="catalog-card"><div class="row"><span class="avatar" aria-hidden="true">M</span><div class="identity"><strong>Viajante</strong><p class="numbers">X 2382 · Y 65 · Z 385</p><small>Overworld · jogador de exemplo</small></div><button class="button button--quiet" id="follow-demo" aria-pressed="false">Seguir</button></div></div>
+    <p class="demo-status" id="follow-status" role="status">As coordenadas sempre têm um lugar reservado.</p>
+    <details class="accordion" open><summary>Camadas e marcadores</summary><div><label class="check"><input type="checkbox" checked> Jogadores</label><label class="check"><input type="checkbox" checked> Animais e criaturas</label><label class="check"><input type="checkbox"> Previsão da seed · ilustrativa</label><p class="caption">Controles de exemplo; não ativam camadas do mapa atual.</p></div></details>
+   </section>
+   <section class="panel" aria-labelledby="pins-title">
+    <div class="panel-heading"><span class="index">04</span><h3 id="pins-title">Não esquecer este lugar</h3></div>
+    <div class="pin-list" id="demo-pins"><article class="post-it"><h3>Nosso primeiro abrigo</h3><p class="numbers">X 2382 · Z 385 / Overworld</p><small>Marcador de exemplo · pessoal</small></article></div>
+    <form id="pin-demo-form" class="pin-form"><label class="field" for="pin-demo-name">Nome do marcador<input class="input" id="pin-demo-name" name="name" maxlength="48" placeholder="Ex.: ponte de madeira" required></label><button class="button button--primary" type="submit">Anotar</button></form>
+    <p class="demo-status" id="pin-status" role="status">A anotação fica apenas nesta demonstração, até recarregar.</p>
+   </section>
+   <section class="panel" aria-labelledby="stamp-title">
+    <div class="panel-heading"><span class="index">05</span><h3 id="stamp-title">O que sabemos do mundo</h3></div>
+    <div class="paper-frame"><span class="stamp">1.589 CHUNKS OBSERVADOS</span><div class="legend" aria-label="Legenda de exemplo"><span><i class="swatch swatch--real" aria-hidden="true"></i>Superfície real</span><span><i class="swatch swatch--seed" aria-hidden="true"></i>Seed ilustrativa</span></div><p class="caption">Número de exemplo, sem percentual de exploração inventado.</p></div>
+   </section>
+   <section class="panel" aria-labelledby="time-title">
+    <div class="panel-heading"><span class="index">06</span><h3 id="time-title">Um marcador no tempo</h3></div>
+    <div class="ribbon"><div class="row spread"><strong>Fita do tempo</strong><output class="numbers" id="time-demo-label" for="time-demo">Agora</output></div><label class="caption" for="time-demo">Escolher instante de exemplo</label><input type="range" id="time-demo" min="0" max="60" value="60" step="1"><div class="ticks" aria-hidden="true"><span>Há 1 h</span><span>Há 30 min</span><span>Agora</span></div></div>
+    <p class="caption demo-status">Demonstração do controle; não há histórico gravado nesta página.</p>
+   </section>
+  </div>
+  <section class="panel" aria-labelledby="chiko-title">
+   <div class="row spread"><div class="panel-heading"><span class="index">07</span><h3 id="chiko-title">O cantinho do Chiko</h3></div><span class="caption">A sua arte entra aqui, sem redesenho.</span></div>
+   <div class="chiko-preview"><div class="chiko-placeholder" role="img" aria-label="Espaço reservado para Chiko lendo" id="chiko-slot"><strong>Chiko</strong><span id="chiko-state-name">lendo</span></div><p class="bubble" id="chiko-bubble" role="status">Só mais uma página…</p></div>
+   <div class="row state-picker" role="group" aria-label="Estado do Chiko"><button class="button" data-chiko="lendo" aria-pressed="true">Lendo</button><button class="button" data-chiko="folheando" aria-pressed="false">Folheando</button><button class="button" data-chiko="dormindo" aria-pressed="false">Dormindo</button><button class="button" data-chiko="animado" aria-pressed="false">Animado / paz</button><button class="button" data-chiko="confuso" aria-pressed="false">Confuso</button></div>
+  </section>
+ </main>
+ <footer class="footer"><span>Chiko / caderno de componentes · Etapa 1</span><span>Sem minimapa. Sem alterar o seu mundo.</span></footer>
+</div>
+</body></html>

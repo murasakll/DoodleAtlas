@@ -9,9 +9,9 @@ from unittest.mock import patch
 
 import numpy as np
 from PIL import Image
-from server import LiveMap, ROOT
-from session_cache import SessionCache, remove_session
-from textures import TextureCatalog
+from chiko.server import LiveMap, ROOT
+from chiko.storage.session_cache import SessionCache, remove_session
+from chiko.cartography.textures import TextureCatalog
 
 
 class Sessions(unittest.TestCase):
@@ -28,7 +28,7 @@ class Sessions(unittest.TestCase):
 
     def test_force_close_watcher_removes_session(self):
         with tempfile.TemporaryDirectory() as folder:
-            script='from session_cache import SessionCache; import time; c=SessionCache('+repr(folder)+'); c.watch(); print(c.path,flush=True); time.sleep(60)'
+            script='from chiko.storage.session_cache import SessionCache; import time; c=SessionCache('+repr(folder)+'); c.watch(); print(c.path,flush=True); time.sleep(60)'
             p=subprocess.Popen([sys.executable,'-c',script],cwd=ROOT,stdout=subprocess.PIPE,text=True)
             path=Path(p.stdout.readline().strip())
             time.sleep(.5)
@@ -52,9 +52,18 @@ class Sessions(unittest.TestCase):
 
 
 class LivePackets(unittest.IsolatedAsyncioTestCase):
+    async def asyncSetUp(self):
+        self.scratch=tempfile.TemporaryDirectory(prefix='chiko-packet-test-');self.root=Path(self.scratch.name)
+        self.world=self.root/'world';self.world.mkdir();(self.world/'levelname.txt').write_text('Packet fixture')
+        self.root_patch=patch('chiko.server.ROOT',self.root);self.root_patch.start()
+
+    async def asyncTearDown(self):
+        self.root_patch.stop();self.scratch.cleanup()
+
     async def test_world_isolation_surface_biome_and_entity_frames(self):
-        config=json.loads((ROOT/'config.json').read_text(encoding='utf-8-sig'))
+        config=json.loads((Path(__file__).resolve().parents[1]/'config'/'settings.example.json').read_text(encoding='utf-8-sig'))
         config['capture_persistent']=False
+        config['world']=str(self.world)
         live=LiveMap(config)
         try:
             surface={'worldId':'wrong','kind':'surface','surfaceVersion':2,'dimension':0,'x':-25,'z':1,'palette':['test:rock'],'ids':[0]*256,'heights':[65]*256,'biome':'test:forest'}

@@ -4,14 +4,14 @@ import unittest
 from pathlib import Path
 import numpy as np
 from leveldb import LevelDB
-from relief import hillshade
-from surface_store import SurfaceStore
-from snapshot_db import snapshot
+from chiko.cartography.relief import hillshade
+from chiko.storage.surface_store import SurfaceStore
+from chiko.storage.snapshot_db import snapshot
 
 
 class Revision(unittest.TestCase):
     def test_saved_surface_is_authoritative_even_against_new_capture(self):
-        from server import LiveMap
+        from chiko.server import LiveMap
         with tempfile.TemporaryDirectory() as folder:
             live=LiveMap.__new__(LiveMap)
             live.live_store=SurfaceStore(Path(folder)/'capture.sqlite')
@@ -37,7 +37,7 @@ class Revision(unittest.TestCase):
             self.assertEqual(first,store.entries()[(0,0,0)])
 
     def test_surface_water_does_not_show_depth(self):
-        from terrain import relief_image
+        from chiko.world.terrain import relief_image
         names=np.full((16,16),'minecraft:water');h=np.full((16,16),62)
         a=np.asarray(relief_image(names,h,depth=np.zeros((16,16))))
         b=np.asarray(relief_image(names,h,depth=np.full((16,16),60)))
