@@ -99,12 +99,7 @@ Mundos, capturas, `data/`, `mapas/`, `logs/` e configurações pessoais ficam fo
 
 ## Desenvolvimento
 
-```powershell
-python -m unittest discover -s tests -v
-node tests/web_smoke.mjs
-```
-
-Os testes usam dados temporários e simulações. Veja [como contribuir](docs/CONTRIBUINDO.md) e a [estrutura do projeto](docs/ESTRUTURA.md). Para dar seu tom aos textos e às traduções, consulte [onde editar](docs/TEXTOS.md).
+A suíte de testes é mantida localmente e não acompanha este repositório. Veja [como contribuir](docs/CONTRIBUINDO.md) e a [estrutura do projeto](docs/ESTRUTURA.md). Para dar seu tom aos textos e às traduções, consulte [onde editar](docs/TEXTOS.md).
 
 ## Créditos
 

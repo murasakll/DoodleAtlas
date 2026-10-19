@@ -17,17 +17,7 @@ Separe comportamento real de simulação. Informe se o teste usou Minecraft aber
 - Arte, fontes e código de terceiros precisam de licença e atribuição compatíveis. Créditos não substituem uma licença.
 - Não inclua saves, capturas, configurações locais, dumps ou binários temporários na contribuição.
 
-Execute os testes relacionados e explique os limites do que foi verificado:
-
-```powershell
-python -m unittest discover -s tests -v
-node tests/web_smoke.mjs
-node tests/map_editor.mjs
-node tests/map_buildings.mjs
-node tests/pixel_avatars.mjs
-node tests/tile_source.mjs
-node tests/universal_pack.mjs
-```
+A suíte de testes do projeto é mantida localmente e não acompanha este repositório. Ao contribuir, descreva como verificou a alteração, os passos para repetir a validação e o que ainda depende de teste no jogo ou navegador real.
 
 DOM/canvas e Script API simulados não provam comportamento no Minecraft real. Comparações de desempenho precisam do mesmo cenário e configurações; evite prometer ganho de FPS a partir de um teste isolado.
 

@@ -99,12 +99,7 @@ Worlds, captures, `data/`, `mapas/`, `logs/` and personal settings stay out of G
 
 ## Development
 
-```powershell
-python -m unittest discover -s tests -v
-node tests/web_smoke.mjs
-```
-
-Tests use temporary data and simulations. See [how to contribute](docs/CONTRIBUINDO.md) and the [project structure](docs/ESTRUTURA.md). To give the copy and translations your own voice, see [where to edit](docs/TEXTOS.md).
+The test suite is kept locally and is not included in this repository. See [how to contribute](docs/CONTRIBUINDO.md) and the [project structure](docs/ESTRUTURA.md). To give the copy and translations your own voice, see [where to edit](docs/TEXTOS.md).
 
 ## Credits
 

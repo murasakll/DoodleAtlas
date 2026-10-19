@@ -45,3 +45,5 @@ src/chiko/vendor/seed-generator/validation-*.json
 *.py[cod]
 fallback/*.mcpack
 fallback/*.mcworld
+# Local test suite; excluded from the published repository.
+/tests/

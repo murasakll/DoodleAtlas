@@ -38,7 +38,6 @@ DoodleAtlas/
 │   │   └── web/             Fonte local e molduras
 │   ├── bedrock_pack/        Manifesto e scripts do addon universal
 │   └── vendor/seed-generator/ Fontes, licenças e DLL opcional
-├── tests/                   Fixtures e simulações isoladas
 ├── iniciar.bat
 ├── instalar.bat
 ├── parar.bat
@@ -73,6 +72,7 @@ O terreno real tem prioridade sobre previsões. Jogadores, entidades e anotaçõ
 | --- | --- |
 | config/settings.local.json | Seu mundo, PIN e escolhas deste PC |
 | runtime/ | Python, dependências e ferramentas instaladas |
+| tests/ | Suíte de testes mantida apenas localmente |
 | data/, mapas/, logs/ | Sessões, capturas, bancos, histórico e logs |
 | dist/, build/ | Pack e artefatos de build gerados |
 | Documentos/, docs/propostas/ | Estudos e relatórios locais de desenvolvimento |
