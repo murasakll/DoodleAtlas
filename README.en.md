@@ -1,90 +1,61 @@
-<p align="center"><img src="src/chiko/assets/branding/doodleatlas-icon.png" alt="Hand-drawn map with Chiko holding a corner" width="220"></p>
+<p align="center"><img src="src/chiko/assets/branding/doodleatlas-icon.png" alt="Hand-drawn map with Chiko holding a corner" width="200"></p>
 
-**English** · [Português](README.md)
+<h1 align="center">DoodleAtlas</h1>
+<p align="center"><b>Your world, kept between maps and doodles.</b></p>
+<p align="center"><a href="README.md">Português</a> · <b>English</b></p>
+<p align="center"><a href="docs/GUIA.md">Guide</a> · <a href="docs/GALERIA.md">Gallery</a> · <a href="docs/ESTRUTURA.md">Structure</a> · <a href="docs/CONTRIBUINDO.md">Contribute</a></p>
 
-# DoodleAtlas
+An interactive map for **Minecraft Bedrock** that looks like a handmade notebook. View your world and players in the browser, draw your village on top and export it as an image.
 
-**Your world, kept between maps and doodles.**
-
-DoodleAtlas is an interactive cartography tool for **Minecraft Bedrock**. Its interface feels like a handmade notebook: paper, black-and-white lines, animated sketch borders and little cyan accents. View the terrain as an illustrated atlas or with natural Minecraft colors and relief.
-
-**Chiko is the atlas librarian.** He keeps your maps and travel records as you explore. The character belongs to [Hachiko / Noah](https://www.tiktok.com/@hachikookami).
-
-[Gallery](docs/GALERIA.md) · [User guide, Portuguese](docs/GUIA.md) · [Project structure, Portuguese](docs/ESTRUTURA.md) · [Contributing, Portuguese](docs/CONTRIBUINDO.md)
-
-## Features
-
-- **Doodle notebook:** light, dark and system themes, sketch borders and optional sounds.
-- **Two terrain styles:** illustrated Atlas or natural Minecraft colors with relief.
-- **Manual editor:** brushes, connecting roads and fences, stamps, background painting and modular buildings.
-- **Three dimensions:** Overworld, Nether and End.
-- **Live players:** positions and entities when the pack sends game data.
-- **Places and characters:** personal or shared waypoints, presets and manual skin/face PNG uploads.
-- **Per-world records:** drawings, chunk history and frames of a selected main region.
-- **PNG export:** the visible area with optional title, north arrow, scale and annotations.
-- **Optional seed preview:** experimental predictions behind observed terrain.
-- **Português / English:** switch under Your map. Your choice stays in this browser.
-
-## Inside the notebook
-
-These screenshots show the running interface with **fictional demonstration data**. They are not a real save or a performance measurement. The icon is an AI-generated adaptation of the supplied Chiko reference.
+**Chiko is the atlas librarian:** he follows your exploration and keeps the maps and records. The character belongs to [Hachiko / Noah](https://www.tiktok.com/@hachikookami).
 
 | Paper atlas | Cartography editor |
 | --- | --- |
 | ![Illustrated map](docs/images/01-atlas.png) | ![Drawing tools](docs/images/02-editor.png) |
-| Shared places | Natural colors |
+| **Shared places** | **Natural colors** |
 | ![Places on the map](docs/images/03-lugares.png) | ![Minecraft mode](docs/images/04-minecraft.png) |
 
-[More screenshots: history, night theme and English interface](docs/GALERIA.md).
+<sub>Screenshots use fictional demonstration data, not a real save. The icon is an AI-generated adaptation of the Chiko reference. [See more in the gallery](docs/GALERIA.md).</sub>
 
-![English interface and language selector](docs/images/07-english.png)
+## What you can do
 
-## Project structure
+- **View your world in the browser:** runs on your PC and opens on a phone on the same network. Terrain comes from the save itself, even with nobody online, through a temporary copy that leaves the original database untouched.
+- **Follow players live:** a behavior pack sends positions and terrain samples through the Content Log.
+- **Choose the look:** Atlas terrain (Antique Atlas art) or Minecraft terrain (natural colors and relief), across all three dimensions: Overworld, Nether and End.
+- **Draw on the map:** brushes, roads and fences that connect automatically, house, temple and windmill stamps, background painting and modular buildings. Drawings are annotations and do not change the game.
+- **Mark places and characters:** personal or shared waypoints, automatically detected beds and portals, appearance presets and skin or face PNG uploads.
+- **Watch a region change:** chunk versions and frames of a main region of up to 4,096 chunks.
+- **Export:** a PNG of the framed area, with optional title, north arrow, scale and annotations, or JSON of your edits.
+- **Predict biomes (experimental):** the seed preview always sits behind terrain that has actually been observed.
+- **Make it yours:** light, dark or automatic theme, animated sketch borders, optional sounds and a Portuguese/English interface.
 
-```text
-DoodleAtlas/
-├── src/chiko/          Application; technical name kept for compatibility
-│   ├── network/        Connection and protocol
-│   ├── world/          Save discovery and reading
-│   ├── storage/        Data, drawings and history
-│   ├── cartography/    Palette, relief and tiles
-│   ├── web/            Interface, map, editor and translations
-│   ├── assets/         Icon, mascot, font and atlas art
-│   ├── bedrock_pack/   Addon for live data
-│   └── vendor/         Optional seed generator and licenses
-├── config/             Public example; local settings are ignored by Git
-├── docs/               Guides and screenshots
-├── scripts/            Installation and development tools
-├── tests/              Tests and simulations
-├── instalar.bat        Set up portable Python on Windows
-├── iniciar.bat         Start the server
-├── parar.bat           Stop the application
-├── pyproject.toml      Package and commands
-├── requirements.txt    Python dependencies
-├── THIRD_PARTY_NOTICES.md
-├── LICENSE
-├── README.en.md
-└── README.md
-```
+## Get started
 
-Assets ship inside the package. Worlds, captures, tokens, logs and personal settings stay out of Git.
-
-## Install and run
-
-The prepared environment targets **Windows x64 with Python 3.12**. The pack declares a minimum engine version of **1.26.50** and Script API **2.9.0**; future versions are not guaranteed. The optional native seed generator targets Windows x64.
+**You need:** Windows x64 and Minecraft Bedrock. The installer downloads Python 3.12 and the dependencies for you.
 
 ```powershell
 git clone https://github.com/murasakll/Bedrock-Real-Time-Map-Viwer.git DoodleAtlas
 cd DoodleAtlas
 ```
 
-### Simple Windows setup
+1. Run **`instalar.bat`**. It sets up Python in `runtime/` and creates `dist/Chiko-Universal.mcpack`.
+2. Run **`iniciar.bat`** and open the address shown in the terminal.
+3. Choose your world in the site's selector.
 
-Run `instalar.bat`, then `iniciar.bat`. The installer downloads Python and dependencies into `runtime/` and creates `dist/Chiko-Universal.mcpack`. Open the address shown in the terminal.
+To stop, use `parar.bat`. To open it on a phone, use the PC's local network address with the same port.
 
-For live data, import the `.mcpack`, enable it in your world and link it under **Settings → Game reading and capture**. Save and leave the world before installing or updating the pack. Run `parar.bat` to stop the app.
+### Enable live players
 
-### With your own Python
+1. Save and leave the world.
+2. Import `dist/Chiko-Universal.mcpack` into Minecraft and enable it in your world, disabling older versions.
+3. Enable Content Log recording in the creator settings.
+4. Open the world, then go to **Settings → Game reading and capture** on the site to copy the linking command.
+5. In chat, as host or operator, run `/livemap:vincular ...` with the identifier shown.
+
+Adjust the capture rate with `/livemap:taxa`. The guide explains each value.
+
+<details>
+<summary><b>Install with your own Python</b></summary>
 
 ```powershell
 python -m venv .venv
@@ -97,11 +68,13 @@ python -m chiko pack
 python -m chiko serve --world "worlds/MyWorld"
 ```
 
-Replace `worlds/MyWorld` with your save path. The `chiko` module and pack filename remain for compatibility; the project is called **DoodleAtlas**.
+Replace `worlds/MyWorld` with your save path. The `chiko` module and pack filename are older names kept for compatibility.
+</details>
 
-### World, address and ports
+<details>
+<summary><b>Configure the world, address and ports</b></summary>
 
-`python -m chiko init` creates **config/settings.local.json** from the example without overwriting your settings. Adjust the fields you need:
+`python -m chiko init` creates `config/settings.local.json` without overwriting what you already have:
 
 ```json
 {
@@ -112,21 +85,17 @@ Replace `worlds/MyWorld` with your save path. The `chiko` module and pack filena
 }
 ```
 
-This is an excerpt: keep the other fields in the generated file. `0.0.0.0` listens on the PC's interfaces; `auto` detects the advertised address. On the host PC, use the local address shown in the terminal. On a phone, use the PC's LAN address and the same port. **127.0.0.1 works for local access**; on another device, it points to that device.
+`0.0.0.0` makes the server listen on the network, but is not the address you type into the browser. On the PC itself, use `127.0.0.1`. On a phone, use the PC's local network address and the same port. Minecraft uses separate connection fields (`minecraft_host`, `minecraft_port` and `minecraft_advertise_host`). More about networking, PIN and troubleshooting is in the [guide](docs/GUIA.md).
+</details>
 
-Minecraft has separate fields: `minecraft_host`, `minecraft_port` and `minecraft_advertise_host`. Their local defaults serve the game on the same PC. A remote IP alone does not provide another server's save or log.
+## What it does not do
 
-## Language and writing
+- **It does not change the game:** drawings and buildings are atlas annotations.
+- **It does not show locations from the seed:** the preview only predicts biomes.
+- **It does not access Realms or public servers automatically:** having a remote server's IP does not give access to its save or log.
+- **It does not promise compatibility with future Minecraft versions.** The pack declares a minimum engine version of **1.26.50** and Script API **2.9.0**.
 
-Open **Your map → Language** to choose **Português** or **English**. The first visit follows the browser language when supported; later visits use your saved choice. User-written names and commands are kept as entered.
-
-The copy is still being written. Short, personal wording is welcome. See [Editing the text](docs/TEXTOS.md) for where the Portuguese source copy and English translations live. Technical diagnostics from dependencies may remain in their original language.
-
-## Limits and local data
-
-The reader works on disposable save snapshots. The pack reads only terrain accessible in the game. Seed predictions do not confirm buildings. History records observed changes; it cannot reconstruct the past. The main region supports up to **4,096 chunks** and has storage limits.
-
-Local settings, `data/`, `mapas/`, `logs/` and worlds are excluded from the repository. Open SQLite databases need a consistent backup; see the [backup guide, Portuguese](docs/GUIA.md#dados-e-backup). There is no promised FPS improvement or automatic support for every Realm or public server.
+Worlds, captures, `data/`, `mapas/`, `logs/` and personal settings stay out of Git. To back up open SQLite databases, see the [guide's procedure](docs/GUIA.md#dados-e-backup).
 
 ## Development
 
@@ -135,23 +104,22 @@ python -m unittest discover -s tests -v
 node tests/web_smoke.mjs
 ```
 
-Tests use temporary data and simulations. They do not replace real game, mobile or long-session testing.
+Tests use temporary data and simulations. See [how to contribute](docs/CONTRIBUINDO.md) and the [project structure](docs/ESTRUTURA.md). To give the copy and translations your own voice, see [where to edit](docs/TEXTOS.md).
 
 ## Credits
 
-- **Project and code:** [murasakll](https://github.com/murasakll).
-- **Chiko character:** [Hachiko / Noah](https://www.tiktok.com/@hachikookami). Chiko acts as the map librarian in DoodleAtlas. The pixel art and presentation illustrations are AI-generated adaptations of the supplied references.
-- **Atlas art:** [Antique Atlas / Hunternif and contributors](https://github.com/AntiqueAtlasTeam/AntiqueAtlas), **CC BY-NC-SA 3.0**.
-- **Handwritten font:** Caveat, bundled locally under **SIL OFL 1.1**.
-- **Optional seed generator:** Cubiomes / Cubitect and SeedForge, with their own MIT licenses.
-- **Libraries:** Amulet Core, aiohttp, Pillow, qrcode and cryptography.
-
-[Third-party notices, attribution and changes](THIRD_PARTY_NOTICES.md).
+- **Project and website:** [murasakll](https://github.com/murasakll) created the site and interface.
+- **Map logic:** most of it was developed with [ChatGPT (OpenAI)](https://openai.com/) and [Claude (Anthropic)](https://www.anthropic.com/).
+- **Chiko character:** [Hachiko / Noah](https://www.tiktok.com/@hachikookami). The character belongs to him; the pixel art image is temporary.
+- **Atlas art:** [Antique Atlas / Hunternif and contributors](https://github.com/AntiqueAtlasTeam/AntiqueAtlas)
+- **Handwritten font:** Caveat
+- **Map prediction:** Cubiomes / Cubitect and SeedForge
+- **Libraries:** Amulet Core, aiohttp, Pillow, qrcode and cryptography
 
 ## License
 
-Original **DoodleAtlas** code is available under the [MIT license](LICENSE). You may use, modify and distribute that code while retaining the copyright notice and license.
+Original code is distributed under the [MIT license](LICENSE).
 
-MIT does **not replace third-party licenses or character rights**. Antique Atlas art remains under **CC BY-NC-SA 3.0**, including its noncommercial condition. Chiko belongs to Hachiko / Noah; no open license for the character is granted here.
+MIT does not cover third-party dependencies, fonts or art: Antique Atlas art remains under **CC BY-NC-SA 3.0**, including its noncommercial condition, and the Caveat font remains under **SIL OFL 1.1**. Chiko belongs to Hachiko / Noah; no open license for the character is granted in this repository. Details are in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 
 Independent project, not affiliated with or endorsed by Mojang, Microsoft or Antique Atlas.
